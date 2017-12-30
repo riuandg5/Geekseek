@@ -13,11 +13,11 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static('public'));
 app.set("view engine", "ejs");
 
-app.get("/",function(req,res){
-    db.post.find()
-    .then(function(posts){
-        res.render('index',{'posts':posts});
-    });
+app.get("/gsad/admin",function(req,res){
+        res.render('admin-panel');
+});
+app.get("/gsad/admin/upload",function(req,res){
+        res.render('admin-upload');
 });
 
 app.use('/api/posts', postRoutes);

@@ -1,0 +1,40 @@
+<%include partials/header%>
+<div class="hero">
+    <h1 class="hero-head">Upload Content</h1>
+    <h3>Please read these carefully before proceeding</h3>
+    <p>
+        * Each Field is necessary. <br>
+        * Subject name should be lower case. <br>
+        * uploaded by should always be "geekseek team".
+    </p>
+    <a href="/gsad/admin" class="btn big green">Go Back</a>
+</div>
+<form action="/api/posts" method="POST">
+    <div class="grid container">
+        <div class="col-4">
+            <label for="title">Title</label>
+            <input type="text" name="title" placeholder="eg. Maths Assignment" required>
+        </div>
+        <div class="col-4">
+            <label for="subject">Subject</label>
+            <input type="text" name="subject" placeholder="eg. Maths" required>
+        </div>
+        <div class="col-4">
+            <label for="uploaded_by">Uploaded By</label>
+            <input type="text" name="uploaded_by"
+            placeholder="Uploaded By" required>
+        </div>
+        <div class="col-12">
+            <label for="info">Info</label>
+            <input type="text" name="info" placeholder="Additional information about the content" required>
+        </div>
+        <div class="col-12">
+            <label for="link">Link</label>
+            <input type="text" name="link" placeholder="Link to content" required>
+        </div>
+        <div class="col-12">
+            <input type="submit" value="Upload" class="btn btn-block yellow">
+        </div>
+    </div>
+</form>
+<%include partials/footer%>
