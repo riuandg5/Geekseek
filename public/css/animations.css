@@ -1,0 +1,9 @@
+.animator{
+    opacity: 0;
+    animation: 1s fadein 0.5s forwards; 
+}
+@keyframes fadein{
+    100%{
+        opacity: 1;
+    }
+}

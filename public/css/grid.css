@@ -1,0 +1,27 @@
+.grid{
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+    grid-auto-rows: auto;
+    grid-gap: 1em;
+}
+.grid > .col-4{
+    grid-column: auto/ span 4;
+}
+.grid > .col-8{
+    grid-column: auto / span 8;
+}
+.grid > .col-12{
+    grid-column: 1 / -1;
+}
+@media (max-width:960px){
+    .grid{
+        grid-template-columns: repeat(8,1fr);
+
+    }
+}
+@media (max-width:640px){
+    .grid{
+        grid-template-columns: repeat(4,1fr);
+
+    }
+}
