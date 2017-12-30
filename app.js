@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static('public'));
+app.use('/api/posts', postRoutes);
 app.set("view engine", "ejs");
 
 app.get("/gsad/admin",function(req,res){
@@ -19,18 +20,34 @@ app.get("/gsad/admin",function(req,res){
 app.get("/gsad/admin/upload",function(req,res){
         res.render('admin-upload');
 });
-
-app.use('/api/posts', postRoutes);
-app.get('/:id',function(req,res){
+app.get("/gsad/admin/view",function(req,res){
+    db.post.find()
+    .then(function(allposts){
+        res.render('admin-view',{'allposts':allposts});
+    })
+    .catch(function(err){
+        res.send(err);
+    })
+});
+app.get("/gsad/admin/delete",function(req,res){
+    db.post.find()
+    .then(function(allposts){
+        res.render('admin-delete',{'allposts':allposts});
+    })
+    .catch(function(err){
+        res.send(err);
+    })
+});
+app.get('/gsad/admin/delete/:id',function(req,res){
     db.post.findById(req.params.id)
     .then(function(post){
         res.render('view',{'post':post});
     });
 });
-app.delete('/:id',function(req,res){
+app.delete('/gsad/admin/delete/:id',function(req,res){
     db.post.findByIdAndRemove(req.params.id)
     .then(function(post){
-        res.redirect('/')
+        res.redirect('/gsad/admin/delete');
     });
 });
 app.listen(port,function(){
