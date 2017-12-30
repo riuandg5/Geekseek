@@ -1,0 +1,8 @@
+<%include partials/header%>
+    <%=post.title%>
+    <form action="/<%=post._id%>?_method=DELETE" method="POST">
+        <button class="btn big red">
+            delete
+        </button>
+    </form>
+<%include partials/footer%>

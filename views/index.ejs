@@ -1,4 +1,12 @@
 <%include partials/header%>
-<h1>welcome to geekseek</h1>
+<div class="grid container">
+    <%posts.forEach(function(post){%>
+        <div class="col-4">
+            <%=post.title%>
+            <a href="/<%=post._id%>" class="btn btn-block yellow">settings</a>
+        </div>
+    <%})%>
+</div>
+
 <%include partials/footer%>
     

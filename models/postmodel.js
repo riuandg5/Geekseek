@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 var postSchema = new mongoose.Schema({
-    name:String,
+    uploaded_by:String,
     subject:String,
     link:String,
     title:String,

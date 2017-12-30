@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../models/')
+const db = require('../models/');
 router.get('/',function(req,res){
     db.post.find()
     .then(function(posts){
@@ -13,10 +13,10 @@ router.get('/',function(req,res){
 router.post('/',function(req,res){
     db.post.create(req.body)
     .then(function(newpost){
-        res.status(201).json(newpost);
+        res.status(201).redirect('/');
     })
     .catch(function(err){
         res.send(err);
     });
-})
+});
 module.exports = router;
