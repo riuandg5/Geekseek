@@ -1,0 +1,16 @@
+<%include partials/header%>
+<div class="grid container">
+    <%cposts.forEach(function(content){%>
+        <div class="col-4 content">
+            <div class="desc">
+                    <h1 class=""><%=content.title%></h1>
+                    <%var d = content.date%>
+                    <p><strong>Uploaded: </strong> <em><%=d.toDateString();%></em></p>
+                    <p><strong>Details: </strong><%=content.info%></p>
+                    <a href="<%=content.link%>" class="btn btn-block yellow">Download</a>
+            </div>
+        </div>
+    <%})%>
+</div>
+
+<%include partials/footer%>

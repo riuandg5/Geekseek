@@ -3,6 +3,7 @@ const mongoose = require('mongoose'); // require mongoose
 // schema definition
 var postSchema = new mongoose.Schema({
     title:String, // title of uploaded post
+    ctype:String,
     subject:String, // subject of the uploaded post eg. maths, eee etc..
     uploaded_by:String, // uploader of the content
     info:String, // info about the content being uploaded
