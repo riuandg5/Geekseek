@@ -1,55 +1,22 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const methodOverride = require('method-override');
+const express = require('express'); // require express
+const mongoose = require('mongoose'); // require mongoose
+const bodyParser = require('body-parser'); //require body-parser
+const methodOverride = require('method-override'); // require method-override
 const app = express();
-var postRoutes = require('./routes/routes');
-var db = require('./models');
+var postRoutes = require('./routes/api'); // require API routing
+var mainRoutes = require('./routes/main'); // require app routing
+var db = require('./models'); // require our model and schema
 var port = process.env.PORT || 8080;
 
-app.use(bodyParser.json());
-app.use(methodOverride('_method'));
-app.use(bodyParser.urlencoded({extended:true}));
-app.use(express.static('public'));
-app.use('/api/posts', postRoutes);
-app.set("view engine", "ejs");
+app.use(bodyParser.json()); // use body parser to return json data to use in our API
+app.use(bodyParser.urlencoded({extended:true})); // body parser
+app.use(methodOverride('_method')); // method-override to handle delete requests 
+app.use(express.static('public')); // host static files with express in this case the public dir.
+app.use('/api/posts', postRoutes); // import API router
+app.use('/',mainRoutes); // import app router
+app.set("view engine", "ejs"); // set templating engine to ejs
 
-app.get("/gsad/admin",function(req,res){
-        res.render('admin-panel');
-});
-app.get("/gsad/admin/upload",function(req,res){
-        res.render('admin-upload');
-});
-app.get("/gsad/admin/view",function(req,res){
-    db.post.find()
-    .then(function(allposts){
-        res.render('admin-view',{'allposts':allposts});
-    })
-    .catch(function(err){
-        res.send(err);
-    })
-});
-app.get("/gsad/admin/delete",function(req,res){
-    db.post.find()
-    .then(function(allposts){
-        res.render('admin-delete',{'allposts':allposts});
-    })
-    .catch(function(err){
-        res.send(err);
-    })
-});
-app.get('/gsad/admin/delete/:id',function(req,res){
-    db.post.findById(req.params.id)
-    .then(function(post){
-        res.render('view',{'post':post});
-    });
-});
-app.delete('/gsad/admin/delete/:id',function(req,res){
-    db.post.findByIdAndRemove(req.params.id)
-    .then(function(post){
-        res.redirect('/gsad/admin/delete');
-    });
-});
+// listen on the port
 app.listen(port,function(){
-    console.log('server started');
+    console.log('server started....');
 });
