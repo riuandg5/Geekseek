@@ -380,8 +380,15 @@ input[type = text]:focus{
 }
 .foot-r{
     width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:50%;
 }
 .foot-l{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width:50%;
 }
 .foot-social{
@@ -398,6 +405,10 @@ input[type = text]:focus{
 .foot-social > li > a{
     color:#f2f2f2;
     padding : 0 1em 0 0;
+}
+.footer-logo{
+    width: 10em;
+    height: 5em;
 }
 @media (max-width:960px){
     .footer{

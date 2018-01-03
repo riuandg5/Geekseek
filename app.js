@@ -2,6 +2,8 @@ const express = require('express'); // require express
 const mongoose = require('mongoose'); // require mongoose
 const bodyParser = require('body-parser'); //require body-parser
 const methodOverride = require('method-override'); // require method-override
+const passport = require('passport');
+const localStrategy = require('passport-local');
 const app = express();
 var postRoutes = require('./routes/api'); // require API routing
 var mainRoutes = require('./routes/main'); // require app routing
@@ -15,6 +17,19 @@ app.use(express.static('public')); // host static files with express in this cas
 app.use('/api/posts', postRoutes); // import API router
 app.use('/',mainRoutes); // import app router
 app.set("view engine", "ejs"); // set templating engine to ejs
+
+// passport config
+app.use(require('express-session')({
+    secret: 'geekseekisthebestwebsite',
+    resave: false,  
+    saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new localStrategy(db.user.authenticate()));
+passport.serializeUser(db.user.serializeUser());
+passport.deserializeUser(db.user.deserializeUser());
 
 // listen on the port
 app.listen(port,function(){

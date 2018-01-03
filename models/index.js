@@ -4,3 +4,4 @@ mongoose.Promise = Promise; // use mongoose promise library to use promises inst
 mongoose.connect('mongodb://localhost/geek'); // connect to data base use more secure way to hide db info in future
 // 'post' has our model and schema
 module.exports.post = require('./postmodel');
+module.exports.user = require('./usermodel');

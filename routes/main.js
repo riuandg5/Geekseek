@@ -36,7 +36,7 @@ router.get("/gsad/admin/delete",function(req,res){
     })
     .catch(function(err){
         res.send(err);
-    })
+    });
 });
 
 // route to admin confirm deletion panel
@@ -47,6 +47,25 @@ router.get('/gsad/admin/delete/:id',function(req,res){
     });
 });
 
+// auth routes
+
+router.get('/gsad/admin/register',function(req,res){
+    res.render('admin-register');
+});
+
+// handle signup logic
+router.post('/gsad/admin/register',function(req,res){
+    var newuser = new db.user({username: req.body.username});
+    db.user.register(newuser, req.body.password,function(err,user){
+        if(err){
+            console.log(err);
+            return res.render('/gsad/admin/register');
+        }
+        passport.authenticate('local')(req,res,function(){
+            res.redirect('/gsad/admin');
+        });
+    });
+});
 // route for different content types
 router.get('/:content',function(req,res){
     db.post.find({'ctype': req.params.content}).sort({date: -1})
