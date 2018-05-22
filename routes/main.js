@@ -14,7 +14,8 @@ router.get('/', function (req, res) {
 // auth routes
 
 router.get('/gsad/admin/register', function (req, res) {
-    res.render('admin-register');
+    // res.render('admin-register');
+    res.send('not allowed!!!');
 });
 
 
