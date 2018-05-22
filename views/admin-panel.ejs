@@ -1,21 +1,24 @@
 <%include partials/header%>
-<div class="hero">
-    <h1 class="hero-head">Welcome</h1>
-    <p><em>With great power, comes great responsibility.</em></p>
-    <p>Use your powers wisely, dont do evil things. :)</p>
-</div>
-<div class="grid container">
-    <div class="col-4 hero">
-        <h1>Upload Content</h1>
-        <a href="/gsad/admin/upload" class="btn btn-block yellow">Upload</a>
+    <div class="hero">
+        <h1 class="hero-head">Welcome</h1>
+        <p>
+            <em>With great power, comes great responsibility.</em>
+        </p>
+        <p>Use your powers wisely, dont do evil things. :)</p>
+        <a href="/gsad/admin/logout" class="btn big green">Logout</a>
     </div>
-    <div class="col-4 hero">
-        <h1>View Content</h1>
-        <a href="/gsad/admin/view" class="btn btn-block blue">View</a>
+    <div class="grid container">
+        <div class="col-4 hero">
+            <h1>Upload Content</h1>
+            <a href="/gsad/admin/upload" class="btn btn-block yellow">Upload</a>
+        </div>
+        <div class="col-4 hero">
+            <h1>View Content</h1>
+            <a href="/gsad/admin/view" class="btn btn-block blue">View</a>
+        </div>
+        <div class="col-4 hero">
+            <h1>Delete Content</h1>
+            <a href="/gsad/admin/delete" class="btn btn-block red">Delete</a>
+        </div>
     </div>
-    <div class="col-4 hero">
-        <h1>Delete Content</h1>
-        <a href="/gsad/admin/delete" class="btn btn-block red">Delete</a>
-    </div>
-</div>
-<%include partials/footer%>
+    <%include partials/footer%>

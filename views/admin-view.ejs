@@ -1,20 +1,37 @@
 <%include partials/header%>
-<div class="hero">
-    <h1 class="hero-head">Here's The Treasure!</h1>
-    <p><em>All The Content we have uploaded ever.</em></p>
-    <a href="/gsad/admin" class="btn big green">Go Back</a>
-</div>
-<div class="grid container">
-    <% allposts.forEach(function(post){%>
-        <div class="col-4 content">
-            <div class="desc">
-                <p><strong>Title: </strong> <%=post.title%></p>
-                <p><strong>Info: </strong><%=post.info%></p>
-                <p><strong>uploader: </strong><%=post.uploaded_by%></p>
-                <p><strong>Upload Date: </strong> <%=post.date%></p>
-                <p><strong>Content ID: </strong><%=post._id%></p>
+    <div class="hero">
+        <h1 class="hero-head">Here's Everything!</h1>
+        <p>
+            <em>All The Content we have uploaded ever.</em>
+        </p>
+        <a href="/gsad/admin" class="btn big green">Go Back</a>
+    </div>
+    <div class="grid container">
+        <% allposts.forEach(function(post){%>
+            <div class="col-4 content">
+                <div class="desc">
+                    <p>
+                        <strong>Title: </strong>
+                        <%=post.title%>
+                    </p>
+                    <p>
+                        <strong>Info: </strong>
+                        <%=post.info%>
+                    </p>
+                    <p>
+                        <strong>uploader: </strong>
+                        <%=post.uploaded_by%>
+                    </p>
+                    <p>
+                        <strong>Upload Date: </strong>
+                        <%=post.date%>
+                    </p>
+                    <p>
+                        <strong>Content ID: </strong>
+                        <%=post._id%>
+                    </p>
+                </div>
             </div>
-        </div>
-    <%});%>
-</div>
-<%include partials/footer%>
+            <%});%>
+    </div>
+    <%include partials/footer%>
