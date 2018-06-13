@@ -1,0 +1,26 @@
+<% include partials/header %>
+
+	<div class="hero">
+        <h1 class="hero-head">New Admin</h1>
+    <% if((currentUser) && (currentUser._id.toString()===superAdmin)){ %>
+    	<a href="/" class="btn big red">Cancel <i class="fas fa-times" aria-hidden="true"></i></a>
+    </div>
+	    <div class="container">
+		    <form action="/gsad/signup" method="POST">
+		        <input type="text" name="username" placeholder="Username" autocomplete="off" required>
+		        <input type="password" name="password" placeholder="Password" pattern="[A-Za-z0-9]{5,}" title="Password should contain atleast 5 characters and no special character is allowed!" required>
+		        <button type="submit" class="btn btn-block green">SignUp <i class="fas fa-user-plus" aria-hidden="true"></i></button>
+		    </form>
+		</div>
+	<% } else { %>
+		<h2>Your are not allowed to register!</h2>
+		<h2>Please contact TeamGeekseek...</h2>
+	</div>
+	<div class="grid container">
+		<div class="col-12">
+			<img src="/favicons/Full Logo.svg">
+		</div>
+	</div>
+	<% } %>
+
+<% include partials/footer %>

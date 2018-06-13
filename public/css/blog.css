@@ -1,0 +1,67 @@
+.blog{
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+    background-color: #e0e0e0;
+    padding: 1.5em;
+    line-height: 2;
+    color:#333;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+}
+.blog .for{
+	font-size: 1.2em;
+}
+.blog .for .for-l{
+	float: left;
+}
+.blog .for .for-r{
+	float: right;
+}
+.postbody a{
+	color: blue;
+}
+.postbody pre, code{
+	padding: 0 0.4em 0.1em 0.4em;
+	margin-left: 0.1em;
+	margin-right: 0.1em;
+	border-radius: 0.2em;
+	background-color: #888;
+	color: white;
+}
+.postbody pre .language-js{
+	color: yellow;
+}
+.postbody li{
+	margin-left: 1.5em;
+}
+.postbody blockquote{
+	padding-left: 1.5em;
+	border-left: 0.2em solid grey;
+}
+.postbody table{
+	width: 100%;
+}
+.postbody table thead{
+	background-color: #bbbeee;
+}
+.postbody table tbody{
+	background-color: #ccceee;
+}
+.postbody table th, td{
+	padding: 0.2em 1em;
+}
+.postbody img:not(.emoji){
+	width: 100%;
+}
+hr{ 
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 0.1em;
+}

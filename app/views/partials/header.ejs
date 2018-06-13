@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Geekseek</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script src="https://cdn.rawgit.com/twitter/twemoji/gh-pages/2/twemoji.min.js"></script>
+    <script src="https://cdn.rawgit.com/markdown-it/markdown-it-emoji/master/dist/markdown-it-emoji.min.js"></script>
+	<script src="https://cdn.rawgit.com/markdown-it/markdown-it/master/dist/markdown-it.min.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <a class="side-btn side-link1" href="/">
+            <div class="side-btn-text">Home</div>
+            <div class="side-btn-icon"><i class="fas fa-home" aria-hidden="true"></i></div>
+        </a>
+        <a class="side-btn side-link2" href="/note">
+            <div class="side-btn-text">Notes</div>
+            <div class="side-btn-icon"><i class="fas fa-book-open" aria-hidden="true"></i></div>
+        </a>
+        <a class="side-btn side-link2" href="/assignment">
+            <div class="side-btn-text">Assignments</div>
+            <div class="side-btn-icon"><i class="fas fa-file-alt" aria-hidden="true"></i></div>
+        </a>
+        <a class="side-btn side-link2" href="/ebook">
+            <div class="side-btn-text">e-Books</div>
+            <div class="side-btn-icon"><i class="fas fa-book" aria-hidden="true"></i></div>
+        </a>
+        <a class="side-btn side-link2" href="/labfile">
+            <div class="side-btn-text">Labfiles</div>
+            <div class="side-btn-icon"><i class="fas fa-flask" aria-hidden="true"></i></div>
+        </a>
+        <a class="side-btn side-link2" href="/qpaper">
+            <div class="side-btn-text">Q-Papers</div>
+            <div class="side-btn-icon"><i class="fas fa-file-medical-alt" aria-hidden="true"></i></div>
+        </a>
+        <a class="side-btn side-link2" href="/blog/posts">
+            <div class="side-btn-text">Blog</div>
+            <div class="side-btn-icon"><i class="fas fa-comment-alt" aria-hidden="true"></i></div>
+        </a>
+        <% if((currentUser) && (currentUser._id.toString()===superAdmin)){ %>
+            <a class="side-btn side-link2" href="/gsad/signup">
+                <div class="side-btn-text">NewAdmin</div>
+                <div class="side-btn-icon"><i class="fas fa-user-plus" aria-hidden="true"></i></div>
+            </a>
+        <% } %>
+        <% if(!currentUser){ %>
+            <a class="side-btn side-link2" href="/gsad/signin">
+                <div class="side-btn-text">Admin</div>
+                <div class="side-btn-icon"><i class="fas fa-user" aria-hidden="true"></i></div>
+            </a>
+        <% } else { %>
+            <a class="side-btn side-link2" href="/gsad/signout">
+                <div class="side-btn-text">SignOut</div>
+                <div class="side-btn-icon"><i class="fas fa-user-slash" aria-hidden="true"></i></div>
+            </a>
+        <% } %>
+    </div>
+    <div class="rest-page">
+    <div class="nav">
+        <div class="container">
+            <div class="logo-web">
+                <h3 class="logo"><a href="/">Geekseek</a></h3>
+                <div class="toggler"><div class="hamburger"></div></div>
+            </div>
+            <ul class="navigation">
+                <li><a href="/note"><i class="fas fa-book-open" aria-hidden="true"></i>Notes</a></li>
+                <li><a href="/assignment"><i class="fas fa-file-alt" aria-hidden="true"></i>Assignments</a></li>
+                <li><a href="/ebook"><i class="fas fa-book" aria-hidden="true"></i>e-Books</a></li>
+                <li><a href="/labfile"><i class="fas fa-flask" aria-hidden="true"></i>Labfiles</a></li>
+                <li><a href="/qpaper"><i class="fas fa-file-medical-alt" aria-hidden="true"></i>Q-Papers</a></li>
+                <li><a href="/blog/posts"><i class="fas fa-comment-alt" aria-hidden="true"></i>Blog</a></li>
+                <% if((currentUser) && (currentUser._id.toString()===superAdmin)){ %>
+                    <li><a href="/gsad/signup"><i class="fas fa-user-plus" aria-hidden="true"></i>NewAdmin</a></li>
+                <% } %>
+                <% if(!currentUser){ %>
+                    <li><a href="/gsad/signin"><i class="fas fa-user" aria-hidden="true"></i>Admin</a></li>
+                <% } else { %>
+                    <li><a href="/gsad/signout"><i class="fas fa-user-slash" aria-hidden="true"></i>Signout</a></li>
+                <% } %>
+            </ul>
+        </div>
+    </div>

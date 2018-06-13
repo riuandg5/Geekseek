@@ -1,0 +1,53 @@
+.icon-container{
+	font-size: 0.75px;
+	width: 200em;
+	height: 200em;
+	-ms-flex-item-align: center;
+    -ms-grid-row-align: center;
+	    align-self: center;
+	background-color: inherit;
+	overflow: hidden;
+ 	margin: 20em 10em;
+}
+.folder,.folder-empty{
+	position: relative;
+	width: 160em;
+	height: 120em;
+	left: 10em;
+	top: 44em;
+	background-color: #f57f17;
+	border-radius: 0px 10em 10em 10em;
+}
+.folder:before,.folder-empty:before{
+	position: absolute;
+	content: '';
+	width: 80em;
+	height: 14.4em;
+	top: -13.2em;
+	left: 0;
+	background-color: #f57f17;
+	border-radius: 100em 100em 0 0 / 100em 100em 0 0;
+}
+.folder:after,.folder-empty:after{
+	position: absolute;
+	content: '';
+	width: 168em;
+	height: 96em;
+	top: 24em;
+	left: 5.5em;
+	-webkit-transform: skew(-6deg);
+	    -ms-transform: skew(-6deg);
+	        transform: skew(-6deg);
+	background: -webkit-radial-gradient(#fbc02d,#f9a825);
+	background: -o-radial-gradient(#fbc02d,#f9a825);
+	background: radial-gradient(#fbc02d,#f9a825);
+	border-radius: 8em;
+}
+.folder:after{
+	-webkit-box-shadow:
+		0 -17em 0 -9em #f5f5f5,0 -17em 0 -8em rgba(0,0,0,0.6),
+		-5em -25em 0 -9em #B3E5FC,-5em -25em 0 -8em rgba(0,0,0,0.6);
+	        box-shadow:
+		0 -17em 0 -9em #f5f5f5,0 -17em 0 -8em rgba(0,0,0,0.6),
+		-5em -25em 0 -9em #B3E5FC,-5em -25em 0 -8em rgba(0,0,0,0.6);
+}

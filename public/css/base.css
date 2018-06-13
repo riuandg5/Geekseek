@@ -1,0 +1,14 @@
+.container{
+    box-sizing: border-box;
+    width:90%;
+    margin: auto;
+    margin-top: 1em;
+}
+a:focus{
+    outline: none;
+    border: none;
+}
+input[type = "button"]{
+    outline: none;
+    border: none;
+}

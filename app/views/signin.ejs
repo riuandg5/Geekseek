@@ -1,0 +1,15 @@
+<% include partials/header %>
+	
+	<div class="hero">
+        <h1 class="hero-head">Admin SignIn</h1>
+        <a href="/" class="btn big red">Cancel <i class="fas fa-times" aria-hidden="true"></i></a>
+    </div>
+    <div class="container">
+	    <form action="/gsad/signin" method="POST">
+	    	<input type="text" name="username" placeholder="Username" autocomplete="off" required>
+	        <input type="password" name="password" placeholder="Password" required>
+	        <button type="submit" class="btn btn-block green">SignIn <i class="fas fa-user" aria-hidden="true"></i></button>
+	    </form>
+    </div>
+
+<% include partials/footer %>

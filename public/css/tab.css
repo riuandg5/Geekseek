@@ -1,0 +1,33 @@
+.tab{
+    overflow: hidden;
+    background-color: #e0e0e0;
+}
+.tab a{
+    float: left;
+    outline: none;
+    cursor: pointer;
+    padding: 0.5em 0.5em;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+    font-size: 1.5em; 
+}
+.tab a:hover{
+    background-color: #bbb;
+}
+.tab-content{
+    display: none;
+    padding: 12px;
+}
+.tab a.active{
+    background-color: dodgerblue;
+    color: white;
+}
+@media only screen and (min-width: 768px){
+    .tab{
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        z-index: 9;
+    }
+}

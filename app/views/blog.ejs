@@ -1,0 +1,41 @@
+<% include partials/header %>
+
+    <div class="animator">
+        <div class="hero">
+            <h1 class="hero-head">Geekseek Blog</h1>
+            <% if(currentUser){ %>
+                <a href="/blog/posts/new" class="btn green big">NewPost <i class="fas fa-edit" aria-hidden="true"></i></a>
+            <% } %>
+        </div>
+        <div class="grid container">
+            <% posts.sort(function(a, b){return b.created - a.created}).forEach(function(post){ %>
+                <div class="col-12 blog">
+                    <div class="for">
+                        <div class="for-l">
+                            For Branch : <%= post.branch %> | 
+                            Sem : <%= post.sem %>
+                        </div>
+                        <div class="for-r">
+                            <%= post.created.toDateString() %>
+                            <% if((currentUser) && ((currentUser._id.equals(post.owner)) || (currentUser._id.toString()===superAdmin))){ %>
+                                <a href="/blog/posts/<%= post._id %>/edit"><i class="fas fa-pencil-alt" aria-hidden="true" style="color: #555"></i></a>
+                            <% } %>
+                        </div>
+                    </div>
+                    <div><hr></div>
+                    <div class="postbody">
+                        <%- post.styledbody %>
+                    </div>
+                    <% if((currentUser) && (currentUser._id.toString()===superAdmin)){ %>
+                        <form action="/blog/posts/<%= post._id %>?_method=DELETE" method="POST">
+                            <button class="btn red btn-block">Delete <i class="fas fa-trash-alt" aria-hidden="true"></i></button>
+                        </form>
+                    <% } %>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+    <script>
+        twemoji.parse(document.body);
+    </script>
+<% include partials/footer %>

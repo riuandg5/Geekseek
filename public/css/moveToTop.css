@@ -1,0 +1,18 @@
+#moveToTop{
+    display: none;
+    position: fixed;
+    bottom: 30px;
+    right: 1%;
+    padding: 8px 10px;
+    border: none;
+    outline: none;
+    border-radius: 50%;
+    background-color: rgba(0,0,0,0.1);
+    color: grey;
+    font-size: 1em;
+}
+#moveToTop:hover{
+	background-color: rgba(0,0,0,1);
+	color: #f3f3f3;
+	cursor: pointer;
+}

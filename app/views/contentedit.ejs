@@ -1,0 +1,62 @@
+<%include partials/header%>
+<div class="hero">
+    <h1 class="hero-head">Edit Content</h1>
+    <a href="/mycontent" class="btn big red">Cancel <i class="fas fa-times" aria-hidden="true"></i></a>
+</div>
+<form action="/<%= content._id %>/update?_method=PUT" method="POST" style="margin-bottom:50px;">
+    <div class="grid container">
+        <div class="col-12">
+            <select name="content[type]" required style="width: 32.7%; height: 30px;">
+                <option value="" disabled selected>Content type..</option>
+                <option id="note" value="note">Notes</option>
+                <option id="assignment" value="assignment">Assignment</option>
+                <option id="labfile" value="labfile">Labfile</option>
+                <option id="ebook" value="ebook">e-Book</option>
+                <option id="qpaper" value="qpaper">QuestionPaper</option>
+            </select>
+            <select name="content[forbranch]" required style="width: 32.7%; height: 30px;">
+                <option value="" disabled selected>For branch..</option>
+                <option id="ALL">ALL</option>
+                <option id="COE">COE</option>
+                <option id="IT">IT</option>
+                <option id="ECE">ECE</option>
+                <option id="ICE">ICE</option>
+                <option id="MPAE">MPAE</option>
+                <option id="ME">ME</option>
+                <option id="BT">BT</option>
+            </select>
+            <select name="content[forsem]" required style="width: 32.7%; height: 30px;">
+                <option value="" disabled selected>For sem..</option>
+                <option id="1">1</option>
+                <option id="2">2</option>
+                <option id="3">3</option>
+                <option id="4">4</option>
+                <option id="5">5</option>
+                <option id="6">6</option>
+                <option id="7">7</option>
+                <option id="8">8</option>
+            </select>
+        </div>
+        <div class="col-6">
+            <label for="subject">Subject</label>
+            <input type="text" name="content[subject]" value="<%= content.subject %>" autocomplete="off" required>
+        </div>
+        <div class="col-6">
+            <label for="title">Title</label>
+            <input type="text" name="content[title]" value="<%= content.title %>" autocomplete="off" required>
+        </div>
+        <div class="col-12">
+            <label for="info">Info (This will improve search results)</label>
+            <input type="text" name="content[info]" value="<%= content.info %>" autocomplete="off" required>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-block green">Update <i class="fas fa-check" aria-hidden="true"></i></button>
+        </div>
+    </div>
+</form>
+<script>
+    document.getElementById("<%= content.ctype %>").selected = true;
+    document.getElementById("<%= content.branch %>").selected = true;
+    document.getElementById("<%= content.sem %>").selected = true;
+</script>
+<%include partials/footer%>
