@@ -117,8 +117,18 @@ router.put("/:contentid/update", middleware.isLoggedIn, function(req, res){
         }
     });
 });
+// route to delete content confirmation
+router.get("/:contentid/delete", middleware.isLoggedIn, function(req, res){
+    Content.findById(req.params.contentid, function(err, foundContent){
+        if(err){
+            console.log(err);
+        } else {
+            res.render("confirmdelete", {content: foundContent});
+        }
+    });
+});
 // route to delete content
-router.delete("/:contentid/delete", middleware.isLoggedIn, function(req, res){
+router.delete("/:contentid/delete/confirmed", middleware.isLoggedIn, function(req, res){
     Content.findByIdAndRemove(req.params.contentid, function(err){
         if(err){
             console.log(err);
