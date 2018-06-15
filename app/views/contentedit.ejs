@@ -3,9 +3,13 @@
     <h1 class="hero-head">Edit Content</h1>
     <a href="/mycontent" class="btn big red">Cancel <i class="fas fa-times" aria-hidden="true"></i></a>
 </div>
-<form action="/<%= content._id %>/update?_method=PUT" method="POST" style="margin-bottom:50px;">
+<form action="/<%= content._id %>/update?_method=PUT" method="POST" enctype="multipart/form-data" style="margin-bottom:50px;">
     <div class="grid container">
-        <div class="col-12">
+        <div class="col-6">
+                <input type="file" name="fup" required style="width: 100%; height: 30px;">
+                <input type="text" name="content[fid]" value="<%= content.fid %>" style="display: none;">
+            </div>
+        <div class="col-6">
             <select name="content[type]" required style="width: 32.7%; height: 30px;">
                 <option value="" disabled selected>Content type..</option>
                 <option id="note" value="note">Notes</option>

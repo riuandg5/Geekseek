@@ -31,6 +31,12 @@ var jwtClient  = new google.auth.JWT(
     ['https://www.googleapis.com/auth/drive'],
     null
 );
+// authorize client
+jwtClient.authorize();
+// id of folder to which content is uploaded
+var folderId = process.env.FOLDERID || '1-jkAMYjcv3u9ZH-tUif2rvovgLCY7pDS';
+// id of folder to which deleted content is moved
+var deletedId = process.env.DELETEDID || '1ds7OZ7ChpMO5sgyA9AcxiGPu0kaRs6ob';
 // require models
 var Content = require("../models/Content.model"),
     Post    = require("../models/Post.model"),
@@ -45,6 +51,26 @@ router.get('/mycontent', middleware.isLoggedIn, function (req, res){
         } else {
             res.render("content", {contents: allContent, ctitle: "mycontent"});
         }
+    });
+});
+// route to show content deleted by admin
+router.get("/alldeletedbyadmin", middleware.isLoggedIn, function(req, res){
+    drive.files.list({auth: jwtClient, q: "'"+[deletedId]+"'"+" in parents and mimeType!='application/vnd.google-apps.folder'"}, (listErr, resp) => {
+       if (listErr) {
+         console.log(listErr);
+         return;
+       }
+       res.render("alldeletedbyadmin", {files: resp.data.files});
+    });
+});
+// route to permanently delete content (deleted by admin) by superadmin
+router.post("/deletepermanently/:fid", middleware.isLoggedIn, function(req, res){
+    drive.files.delete({ auth: jwtClient, fileId: req.params.fid}, (err, resp) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.redirect("/alldeletedbyadmin");
     });
 });
 // content route
@@ -63,37 +89,28 @@ router.get('/gsad/upload', middleware.isLoggedIn, function (req, res){
 });
 // route to upload new content
 router.post('/gsad/upload', upload.single("fup"), function (req, res){
-    // upload to google
-    jwtClient.authorize(function(authErr){
-        if(authErr){
-            console.log(authErr);
+    // file metadata that is name and parent folder
+    var fileMetadata = {name: req.file.originalname, parents: [folderId]};
+    // set file extension and file path
+    var media = {
+        mimeType: req.file.mimetype,
+        body: fs.createReadStream('./tempUploads/' + req.file.originalname)
+    };
+    // upload request
+    drive.files.create({auth: jwtClient, resource: fileMetadata, media, fields: 'id'}, (err, file) => {
+        if (err){
+            console.log(err);
             return;
         }
-        // id of folder to which content is uploaded
-        var folderId = process.env.FOLDERID || '1-jkAMYjcv3u9ZH-tUif2rvovgLCY7pDS';
-        // file metadata that is name and parent folder
-        var fileMetadata = {name: req.file.originalname, parents: [folderId]};
-        // set file extension and file path
-        var media = {
-            mimeType: req.file.mimetype,
-            body: fs.createReadStream('./tempUploads/' + req.file.originalname)
-        };
-        // upload request
-        drive.files.create({auth: jwtClient, resource: fileMetadata, media, fields: 'id'}, (err, file) => {
-            if (err){
+        Content.create({ctype: req.body.content.type, branch: req.body.content.forbranch, sem: req.body.content.forsem, subject: req.body.content.subject, title: req.body.content.title, info: req.body.content.info, fid: file.data.id, owner: req.user.id}, function(err, newContent){
+            if(err){
                 console.log(err);
-                return;
+            } else {
+                fs.unlink('./tempUploads/' + req.file.originalname, (err) => {
+                    if (err) throw err;
+                });
+                res.redirect("/mycontent");
             }
-            Content.create({ctype: req.body.content.type, branch: req.body.content.forbranch, sem: req.body.content.forsem, subject: req.body.content.subject, title: req.body.content.title, info: req.body.content.info, fid: file.data.id, owner: req.user.id}, function(err, newContent){
-                if(err){
-                    console.log(err);
-                } else {
-                    fs.unlink('./tempUploads/' + req.file.originalname, (err) => {
-                        if (err) throw err;
-                    });
-                    res.redirect("/mycontent");
-                }
-            });
         });
     });
 });
@@ -108,13 +125,30 @@ router.get("/:contentid/edit", middleware.isLoggedIn, function(req, res){
     });
 });
 // route to update content
-router.put("/:contentid/update", middleware.isLoggedIn, function(req, res){
-    Content.findByIdAndUpdate(req.params.contentid, {$set:{ctype: req.body.content.type, branch: req.body.content.forbranch, sem: req.body.content.forsem, subject: req.body.content.subject, title: req.body.content.title, info: req.body.content.info}}, function(err, updatedData){
-        if(err){
+router.put("/:contentid/update", middleware.isLoggedIn, upload.single("fup"), function(req, res){
+    // file metadata that is name
+    var fileMetadata = {name: req.file.originalname};
+    // set file extension and file path
+    var media = {
+        mimeType: req.file.mimetype,
+        body: fs.createReadStream('./tempUploads/' + req.file.originalname)
+    };
+    // update request
+    drive.files.update({auth: jwtClient, fileId: req.body.content.fid, resource: fileMetadata, media, fields: 'id'}, (err, file) => {
+        if (err){
             console.log(err);
-        } else {
-            res.redirect("/mycontent");
+            return;
         }
+        Content.findByIdAndUpdate(req.params.contentid, {$set:{ctype: req.body.content.type, branch: req.body.content.forbranch, sem: req.body.content.forsem, subject: req.body.content.subject, title: req.body.content.title, info: req.body.content.info, fid: file.data.id}}, function(err, updatedData){
+            if(err){
+                console.log(err);
+            } else {
+                fs.unlink('./tempUploads/' + req.file.originalname, (err) => {
+                    if (err) throw err;
+                });
+                res.redirect("/mycontent");
+            }
+        });
     });
 });
 // route to delete content confirmation
@@ -127,13 +161,25 @@ router.get("/:contentid/delete", middleware.isLoggedIn, function(req, res){
         }
     });
 });
-// route to delete content
+// route to delete content by admin
 router.delete("/:contentid/delete/confirmed", middleware.isLoggedIn, function(req, res){
-    Content.findByIdAndRemove(req.params.contentid, function(err){
-        if(err){
-            console.log(err);
+    drive.files.get({ auth: jwtClient, fileId: req.body.content.fid, fields: 'parents'}, (getErr, resp) => {
+        if (getErr) {
+            console.log(getErr);
+            return;
         }
-        res.redirect("/mycontent");
+        drive.files.update({auth: jwtClient, fileId: req.body.content.fid, removeParents: resp.data.parents[0], addParents: [deletedId], fields: 'id, parents'}, (err, file) => {
+            if (err) {
+              console.log(err);
+              return;
+            }
+            Content.findByIdAndRemove(req.params.contentid, function(err){
+                if(err){
+                    console.log(err);
+                }
+                res.redirect("/mycontent");
+            });
+        });
     });
 });
 // export express router to use in main app

@@ -16,6 +16,7 @@
                 <p>Upload details: TeamGeekseek | <%= content.ctype %> | <%= content.created.toDateString() %></p>
                 <a href="https://drive.google.com/file/d/<%= content.fid %>/view" target="_blank" class="btn btn-block green">Download or View <i class="fas fa-download" aria-hidden="true"></i></a>
                 <form action="/<%= content._id %>/delete/confirmed?_method=DELETE" method="POST">
+                    <input type="text" name="content[fid]" value="<%= content.fid %>" style="display: none;">
                     <button class="btn btn-block red">Yes, Delete <i class="fas fa-trash-alt" aria-hidden="true"></i></button>
                 </form>
             </div>

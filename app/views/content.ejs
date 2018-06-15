@@ -25,6 +25,9 @@
 				<a href="/gsad/upload" class="btn green big">NewContent <i class="fas fa-plus" aria-hidden="true"></i></a>
 				<a href="/mycontent" class="btn blue big">MyContent <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
 			<% } %>
+			<% if((currentUser) && (currentUser._id.toString()===superAdmin)){ %>
+				<a href="/alldeletedbyadmin" class="btn red big">DeletedContent <i class="fas fa-trash" aria-hidden="true"></i></a>
+			<% } %>
 			<p>
 				Instructions for better search results :<br>
 				> Select branch only or Select sem only or Select both or Search directly<br>
