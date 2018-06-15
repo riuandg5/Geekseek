@@ -37,7 +37,7 @@ router.get("/gsad/signin", function(req, res){
     res.render("signin");
 });
 // route to post signin form data
-router.post("/gsad/signin", passport.authenticate("local", {successRedirect: "/mycontent", failureRedirect: "/signin"}), function(req, res){
+router.post("/gsad/signin", passport.authenticate("local", {successRedirect: "/mycontent", failureRedirect: "/gsad/signin"}), function(req, res){
 });
 // route to signout
 router.get("/gsad/signout", middleware.isLoggedIn, function(req, res){
