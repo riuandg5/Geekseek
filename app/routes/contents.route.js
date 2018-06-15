@@ -125,7 +125,7 @@ router.get("/:contentid/edit", middleware.isLoggedIn, function(req, res){
     });
 });
 // route to update content
-router.put("/:contentid/update", middleware.isLoggedIn, upload.single("fup"), function(req, res){
+router.put("/:contentid/update", upload.single("fup"), function(req, res){
     // file metadata that is name
     var fileMetadata = {name: req.file.originalname};
     // set file extension and file path
