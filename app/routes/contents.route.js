@@ -126,30 +126,40 @@ router.get("/:contentid/edit", middleware.isLoggedIn, function(req, res){
 });
 // route to update content
 router.put("/:contentid/update", upload.single("fup"), function(req, res){
-    // file metadata that is name
-    var fileMetadata = {name: req.file.originalname};
-    // set file extension and file path
-    var media = {
-        mimeType: req.file.mimetype,
-        body: fs.createReadStream('./tempUploads/' + req.file.originalname)
-    };
-    // update request
-    drive.files.update({auth: jwtClient, fileId: req.body.content.fid, resource: fileMetadata, media, fields: 'id'}, (err, file) => {
-        if (err){
-            console.log(err);
-            return;
-        }
-        Content.findByIdAndUpdate(req.params.contentid, {$set:{ctype: req.body.content.type, branch: req.body.content.forbranch, sem: req.body.content.forsem, subject: req.body.content.subject, title: req.body.content.title, info: req.body.content.info, fid: file.data.id}}, function(err, updatedData){
+    if(req.file){
+        // file metadata that is name
+        var fileMetadata = {name: req.file.originalname};
+        // set file extension and file path
+        var media = {
+            mimeType: req.file.mimetype,
+            body: fs.createReadStream('./tempUploads/' + req.file.originalname)
+        };
+        // update request
+        drive.files.update({auth: jwtClient, fileId: req.body.content.fid, resource: fileMetadata, media, fields: 'id'}, (err, file) => {
+            if (err){
+                console.log(err);
+                return;
+            }
+            Content.findByIdAndUpdate(req.params.contentid, {$set:{ctype: req.body.content.type, branch: req.body.content.forbranch, sem: req.body.content.forsem, subject: req.body.content.subject, title: req.body.content.title, info: req.body.content.info, fid: file.data.id}}, function(err, updatedData){
+                if(err){
+                    console.log(err);
+                } else {
+                    fs.unlink('./tempUploads/' + req.file.originalname, (err) => {
+                        if (err) throw err;
+                    });
+                    res.redirect("/mycontent");
+                }
+            });
+        });
+    } else {
+        Content.findByIdAndUpdate(req.params.contentid, {$set:{ctype: req.body.content.type, branch: req.body.content.forbranch, sem: req.body.content.forsem, subject: req.body.content.subject, title: req.body.content.title, info: req.body.content.info}}, function(err, updatedData){
             if(err){
                 console.log(err);
             } else {
-                fs.unlink('./tempUploads/' + req.file.originalname, (err) => {
-                    if (err) throw err;
-                });
                 res.redirect("/mycontent");
             }
         });
-    });
+    }
 });
 // route to delete content confirmation
 router.get("/:contentid/delete", middleware.isLoggedIn, function(req, res){
