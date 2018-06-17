@@ -1,5 +1,5 @@
 {
-  "name": "Geekseek",
+  "name": "geekseek",
   "version": "1.0.0",
   "description": "A web project to provide students with study material.",
   "main": "server.js",
@@ -11,9 +11,10 @@
     "type": "git",
     "url": "git+https://github.com/riuandg5/Geekseek.git"
   },
-  "author": "Sachin Saini & REU",
+  "author": "Sachin Saini & Rishu Anand",
   "license": "MIT",
   "dependencies": {
+    "bluebird": "^3.5.1",
     "body-parser": "^1.18.3",
     "ejs": "^2.6.1",
     "express": "^4.16.3",

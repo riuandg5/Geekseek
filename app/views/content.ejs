@@ -106,26 +106,26 @@
     </div>
     <script>
 		function searchFunction(){
-			var branch, sem, searchmore, filter, content, searchstring;
+			var branch, sem, searchmore, filter, contents, searchstring;
 			branch = document.getElementById("branch");
 			sem = document.getElementById("sem");
 			searchmore = document.getElementById("searchmore");
-			if((branch.value==="") && (sem.value==="")){
+			if((!branch.value) && (!sem.value)){
 				filter = searchmore.value.toUpperCase();
 			} else {
 				filter = branch.value.toUpperCase()+sem.value.toUpperCase()+" "+searchmore.value.toUpperCase();
 			}
-			content = document.getElementsByClassName("content");
-			for(i = 0; i < content.length; i++){
-				searchstring = content[i].getElementsByClassName("searchstring")[0];
+			contents = document.getElementsByClassName("content");
+			[...contents].forEach(content => {
+				searchstring = content.getElementsByClassName("searchstring")[0];
 				if(searchstring){
 		  			if(searchstring.innerHTML.toUpperCase().indexOf(filter) > -1) {
-		    			content[i].style.display = "";
+		    			content.style.display = "";
 		  			} else {
-		    			content[i].style.display = "none";
+		    			content.style.display = "none";
 		  			}
 				}       
-			}
+			})
 		}
 	</script>
 

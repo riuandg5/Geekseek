@@ -16,7 +16,10 @@ var Content          = require("./app/models/Content.model"),
 // require routes
 var	contentsRoute    = require("./app/routes/contents.route"),
     postsRoute       = require("./app/routes/posts.route"),
-	indexRoute       = require("./app/routes/index.route");;
+	indexRoute       = require("./app/routes/index.route");
+// tell mongoose to use bluebird or native ES6 promise library
+// mongoose.Promise = global.Promise; // native ES6 promise library
+mongoose.Promise = require('bluebird');
 // connect to database
 mongoose.connection.openUri(dburi);
 // set views directory path
@@ -37,7 +40,7 @@ app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-// middleware to tell that currentUser is req.user
+// middleware to tell that currentUser is req.user and get superadmin id
 app.use(function(req, res, next){
 	res.locals.currentUser = req.user;
     res.locals.superAdmin = process.env.SUPERADMIN || '5b1d6a77e267e411d4cce1a6';
