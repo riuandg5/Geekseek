@@ -65,3 +65,11 @@ hr{
     border-style: inset;
     border-width: 0.1em;
 }
+@media (max-width: 500px){
+	.blog .for .for-l{
+		width: 100%;
+	}
+	.blog .for .for-r{
+		float: left;
+	}
+}

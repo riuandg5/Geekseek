@@ -1,5 +1,4 @@
 .nav{
-    background-color: #353443;
     color: #f2f2f2;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -7,7 +6,6 @@
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
             justify-content: space-between;
-    padding: 1em 1em 1em 0;
     position: -webkit-sticky;
     position: sticky;
     top:0;
@@ -28,8 +26,10 @@
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    height: 0;
 }
 .navigation > li{
+    background-color: rgba(53, 52, 67, 0.9);
     list-style: none;
     padding: 0 1.3em 0 0;
 }
@@ -40,7 +40,9 @@
     padding-right: 0;
 }
 .logo-web{
-    width:100%;
+    background-color: #353443;
+    width: 100%;
+    padding: 1em 1.2em;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -100,7 +102,8 @@
             transform: translateY(-14px) rotate(90deg);
 }
 .isvisible{
-    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 /* responsive navbar */
@@ -140,29 +143,26 @@
                 flex-direction: column;
         width: 100%;
         font-size: 1.2em;
-        display: none;
-        z-index: 9999;
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0.5s linear, opacity 0.5s linear;
     }
     .navigation > li{
-        width:1 00%;
+        width: 100%;
         padding: 0;
         border-bottom: 1px solid #f3f3f3;
-    }
-    .navigation > li > a{
-        display: block;
-        width: 100%; 
-        padding: 1em 0 1em 1.5em;
-    }
-    .navigation > li > a > i{
-        font-size: 1.2em;
-        padding-right: 2em;
     }
     .navigation > li:nth-child(1){
         border-top: 1px solid #f3f3f3;
     }
-    .logo-web{
-        width:90%;
-        margin-bottom: 1em;
+    .navigation > li > a{
+        display: block;
+        width: 100%; 
+        padding: 0.8em 0 0.8em 1.5em;
+    }
+    .navigation > li > a > i{
+        font-size: 1.2em;
+        padding-right: 2em;
     }
     .toggler{
         display: block;
