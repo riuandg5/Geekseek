@@ -4,12 +4,12 @@
     "icons": [
         {
             "src": "/favicons/android-chrome-192x192.png",
-            "sizes": "192x192",
+            "sizes": "384x384",
             "type": "image/png"
         },
         {
             "src": "/favicons/android-chrome-384x384.png",
-            "sizes": "384x384",
+            "sizes": "512x512",
             "type": "image/png"
         }
     ],
