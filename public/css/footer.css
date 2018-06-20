@@ -26,7 +26,7 @@
 }
 .foot-social > li > a{
     color:#f2f2f2;
-    padding : 0 1em 0 0;
+    padding : 0 0.5em 0 0.5em;
 }
 @media (max-width:960px){
     .footer{
