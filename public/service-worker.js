@@ -26,32 +26,32 @@ self.addEventListener('install', function onServiceWorkerInstall(event) {
 // // The fetch event happens for the page request with the
 // // ServiceWorker's scope, and any request made within that
 // // page
-self.addEventListener('fetch', function onServiceWorkerFetch(event) {
-  console.log('fetch event', event)
-  // Calling event.respondWith means we're in charge
-  // of providing the response. We pass in a promise
-  // that resolves with a response object
-  event.respondWith(
-    // First we look if we can get the (maybe updated)
-    // resource from the network
-    fetch(event.request)
-    // .then(function updateCacheAndReturnNetworkResponse(networkResponse) {
-    //   console.log(`fetch from network for ${event.request.url} successfull, updating cache`)
-    //   caches.open(currentCache).then(function addToCache(cache) {
-    //     return cache.add(event.request)
-    //   })
-    //   return networkResponse
-    // })
-    // .catch(function lookupCachedResponse(reason) {
-    //   // On failure, look up in the Cache for the requested resource
-    //   console.log(`fetch from network for ${event.request.url} failed:`, reason)
-    //   return caches.match(event.request)
-    //     .then(function returnCachedResponse(cachedResponse) {
-    //       return cachedResponse
-    //     })
-    // })
-  )
-})
+// self.addEventListener('fetch', function onServiceWorkerFetch(event) {
+//   console.log('fetch event', event)
+//   // Calling event.respondWith means we're in charge
+//   // of providing the response. We pass in a promise
+//   // that resolves with a response object
+//   event.respondWith(
+//     // First we look if we can get the (maybe updated)
+//     // resource from the network
+//     fetch(event.request)
+//     // .then(function updateCacheAndReturnNetworkResponse(networkResponse) {
+//     //   console.log(`fetch from network for ${event.request.url} successfull, updating cache`)
+//     //   caches.open(currentCache).then(function addToCache(cache) {
+//     //     return cache.add(event.request)
+//     //   })
+//     //   return networkResponse
+//     // })
+//     // .catch(function lookupCachedResponse(reason) {
+//     //   // On failure, look up in the Cache for the requested resource
+//     //   console.log(`fetch from network for ${event.request.url} failed:`, reason)
+//     //   return caches.match(event.request)
+//     //     .then(function returnCachedResponse(cachedResponse) {
+//     //       return cachedResponse
+//     //     })
+//     // })
+//   )
+// })
 
 
 
