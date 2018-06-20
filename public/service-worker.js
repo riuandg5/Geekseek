@@ -1,6 +1,6 @@
 // /* eslint no-var:0, no-console:0 */
 // // thanks Jake! https://github.com/jakearchibald/simple-serviceworker-tutorial/blob/gh-pages/sw.js
-// var currentCache = 'GS_NSIT'
+var currentCache = 'GS_NSIT'
 
 // // Chrome's currently missing some useful cache methods,
 // // this polyfill adds them.
