@@ -13,14 +13,14 @@ self.addEventListener('install', function onServiceWorkerInstall(event) {
   console.log('install event', event)
   // We pass a promise to event.waitUntil to signal how
   // long install takes, and if it failed
-  // event.waitUntil(
-  //   // We open a cache…
-  //   caches.open(currentCache).then(function addResourceToCache(cache) {
-  //     return cache.addAll([
-  //       '/'
-  //     ])
-  //   })
-  // )
+  event.waitUntil(
+    // We open a cache…
+    caches.open(currentCache).then(function addResourceToCache(cache) {
+      return cache.addAll([
+        './app/views/home.ejs'
+      ])
+    })
+  )
 })
 
 // // The fetch event happens for the page request with the
@@ -37,19 +37,19 @@ self.addEventListener('fetch', function onServiceWorkerFetch(event) {
     fetch(event.request)
     .then(function updateCacheAndReturnNetworkResponse(networkResponse) {
       console.log(`fetch from network for ${event.request.url} successfull, updating cache`)
-      // caches.open(currentCache).then(function addToCache(cache) {
-      //   return cache.add(event.request)
-      // })
+      caches.open(currentCache).then(function addToCache(cache) {
+        return cache.add(event.request)
+      })
       return networkResponse
     })
-    // .catch(function lookupCachedResponse(reason) {
-    //   // On failure, look up in the Cache for the requested resource
-    //   console.log(`fetch from network for ${event.request.url} failed:`, reason)
-    //   return caches.match(event.request)
-    //     .then(function returnCachedResponse(cachedResponse) {
-    //       return cachedResponse
-    //     })
-    // })
+    .catch(function lookupCachedResponse(reason) {
+      // On failure, look up in the Cache for the requested resource
+      console.log(`fetch from network for ${event.request.url} failed:`, reason)
+      return caches.match(event.request)
+        .then(function returnCachedResponse(cachedResponse) {
+          return cachedResponse
+        })
+    })
   )
 })
 
