@@ -10,6 +10,7 @@
 					<li><a href="https://github.com/thetinygoat" title="Sachin Saini" target="_blank"><img src="https://avatars0.githubusercontent.com/u/32238055" style="width: 3em; height: 3em; border-radius: 50%;"></a></li>
 					<li><a href="https://github.com/riuandg5/Geekseek" title="Github Project" target="_blank"><i class="fab fa-github fa-3x"></i></a></li>
 					<li><a href="https://github.com/riuandg5" title="Rishu Anand" target="_blank"><img src="https://avatars2.githubusercontent.com/u/34133332" style="background-color: white; width: 3em; height: 3em; border-radius: 50%;"></a></li>
+					<li><a href="#" onClick="addToHomeScreen()"><i class="fas fa-plus fa-3x"></i></a></li>
 				</ul>
 			</div>
 		</div>
@@ -17,17 +18,17 @@
 	</div>
 	<script src="/js/script.js"></script>
 	<script>
-        !function(){
-        	function e(){
-        		"serviceWorker"in navigator&&location.host.indexOf("localhost")===-1&&navigator.serviceWorker.register("/service-worker.js")
-        		.then(function(e){
-        			console.log("ServiceWorker registration successful with scope: ",e.scope)
+		function addToHomeScreen(){
+			if(("serviceWorker"in navigator) && (location.host.indexOf("localhost")===-1)){
+	            navigator.serviceWorker.register('/service-worker.js')
+	            .then(function(reg){
+        			console.log("ServiceWorker registration successful with scope: ", reg.scope)
         		})
-        		.catch(function(e){
-        			console.error("ServiceWorker registration failed: ",e)
+        		.catch(function(reg){
+        			console.error("ServiceWorker registration failed: ", reg)
         		})
-        	}e()
-        }();
+	        }
+		}
     </script>
 </body>
 </html>
