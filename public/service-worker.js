@@ -1,4 +1,4 @@
-// thanks Jake! https://github.com/jakearchibald/simple-serviceworker-tutorial/blob/gh-pages/sw.js
+// cache name
 var currentCache = 'Geekseek_NSIT'
 
 // Chrome's currently missing some useful cache methods,
