@@ -1,14 +1,13 @@
-// /* eslint no-var:0, no-console:0 */
-// // thanks Jake! https://github.com/jakearchibald/simple-serviceworker-tutorial/blob/gh-pages/sw.js
+// thanks Jake! https://github.com/jakearchibald/simple-serviceworker-tutorial/blob/gh-pages/sw.js
 var currentCache = 'Geekseek_NSIT'
 
-// // Chrome's currently missing some useful cache methods,
-// // this polyfill adds them.
+// Chrome's currently missing some useful cache methods,
+// this polyfill adds them.
 polyfillCache()
 
-// // Here comes the install event!
-// // This only happens once, when the browser sees this
-// // version of the ServiceWorker for the first time.
+// Here comes the install event!
+// This only happens once, when the browser sees this
+// version of the ServiceWorker for the first time.
 self.addEventListener('install', function onServiceWorkerInstall(event) {
   console.log('install event', event)
   // We pass a promise to event.waitUntil to signal how
@@ -27,9 +26,9 @@ self.addEventListener('install', function onServiceWorkerInstall(event) {
   )
 })
 
-// // The fetch event happens for the page request with the
-// // ServiceWorker's scope, and any request made within that
-// // page
+// The fetch event happens for the page request with the
+// ServiceWorker's scope, and any request made within that
+// page
 self.addEventListener('fetch', function onServiceWorkerFetch(event) {
   console.log('fetch event', event)
   // Calling event.respondWith means we're in charge
@@ -60,7 +59,6 @@ self.addEventListener('fetch', function onServiceWorkerFetch(event) {
 
 
 function polyfillCache() {
-  /* eslint-disable */
   if (!Cache.prototype.add) {
     Cache.prototype.add = function add(request) {
       return this.addAll([request])
