@@ -17,7 +17,11 @@ self.addEventListener('install', function onServiceWorkerInstall(event) {
     // We open a cache…
     caches.open(currentCache).then(function addResourceToCache(cache) {
       return cache.addAll([
-        '/'
+        '/',
+        '/css/',
+        '/favicons/',
+        'favicons/svg/'
+        '/js/'
       ])
     })
   )

@@ -17,17 +17,17 @@
 	</div>
 	<script src="/js/script.js"></script>
 	<script>
-        !function(){
-        	function e(){
-        		"serviceWorker"in navigator&&location.host.indexOf("localhost")===-1&&navigator.serviceWorker.register("/service-worker.js")
-        		.then(function(e){
-        			console.log("ServiceWorker registration successful with scope: ",e.scope)
+        if('serviceWorker' in navigator){
+        	window.addEventListener('load', function() {
+				navigator.serviceWorker.register('/service-worker.js')
+				.then(function(e){
+        			console.log("ServiceWorker registration successful with scope: ", e.scope);
         		})
         		.catch(function(e){
-        			console.error("ServiceWorker registration failed: ",e)
+        			console.error("ServiceWorker registration failed: ", e);
         		})
-        	}e()
-        }();
+			});
+        }
     </script>
 </body>
 </html>
