@@ -1,9 +1,9 @@
 // cache name
-var currentCache = 'Geekseek_NSIT'
+var currentCache = 'Geekseek_NSIT';
 
 // Chrome's currently missing some useful cache methods,
 // this polyfill adds them.
-polyfillCache()
+polyfillCache();
 
 // Here comes the install event!
 // This only happens once, when the browser sees this
