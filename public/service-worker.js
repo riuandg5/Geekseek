@@ -20,7 +20,7 @@ self.addEventListener('install', function onServiceWorkerInstall(event) {
         '/',
         '/css/',
         '/favicons/',
-        'favicons/svg/'
+        'favicons/svg/',
         '/js/'
       ])
     })
