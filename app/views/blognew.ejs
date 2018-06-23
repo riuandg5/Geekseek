@@ -5,9 +5,9 @@
             <h1 class="hero-head">Create new post here...</h1>
             <a href="/blog/posts" class="btn red big">Cancel <i class="fas fa-times" aria-hidden="true"></i></a>
         </div>
-        <form action="/blog/posts/new" method="POST" class="grid container">
-        	<div class="col-6">
-				<select name="post[forbranch]" required style="width: 100%; height: 30px;">
+        <form action="/blog/posts/new" method="POST" class="form-grid container">
+        	<div class="col-12">
+				<select name="post[forbranch]" required style="width: 49.5%; height: 30px;">
 					<option value="" disabled selected>For branch..</option>
 					<option id="ALL">ALL</option>
 				    <option id="COE">COE</option>
@@ -18,9 +18,7 @@
 				    <option id="ME">ME</option>
 				    <option id="BT">BT</option>
 				</select>
-			</div>
-			<div class="col-6">
-				<select name="post[forsem]" required style="width: 100%; height: 30px;">
+				<select name="post[forsem]" required style="width: 49.5%; height: 30px;">
 					<option value="" disabled selected>For sem..</option>
 				    <option id="1">1</option>
 				    <option id="2">2</option>
@@ -44,7 +42,7 @@
 				<button onclick="doPreview();" class="btn btn-block blue">Preview <i class="far fa-eye" aria-hidden="true"></i></button>
 			</div>
 			<div class="col-12 blog">
-		        <div id="html" class="postbody"></div>
+				<div id="html" class='postbody'></div>
 			</div>
 		</div>
     </div>
