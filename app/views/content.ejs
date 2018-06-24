@@ -23,7 +23,9 @@
 			<% } %>
 			<% if(currentUser){ %>
 				<a href="/gsad/upload" class="btn green big">NewContent <i class="fas fa-plus" aria-hidden="true"></i></a>
-				<a href="/mycontent" class="btn blue big">MyContent <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+				<% if(ctitle!=="mycontent"){ %>
+					<a href="/mycontent" class="btn blue big">MyContent <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+				<% } %>
 			<% } %>
 			<% if((currentUser) && (currentUser._id.toString()===superAdmin)){ %>
 				<a href="/alldeletedbyadmin" class="btn red big">DeletedContent <i class="fas fa-trash" aria-hidden="true"></i></a>
@@ -76,7 +78,11 @@
 								</div>
 								<p>Info: <%= content.info %></p>
 				                <p>Upload details: TeamGeekseek | <%= content.ctype %> | <%= content.created.toDateString() %></p>
-								<a href="https://drive.google.com/file/d/<%= content.fid %>/view" target="_blank" class="btn btn-block green">Download or View <i class="fas fa-download" aria-hidden="true"></i></a>
+				                <% if(content.fid){ %>
+				                	<a href="https://drive.google.com/file/d/<%= content.fid %>/view" target="_blank" class="btn btn-block green">Download or View <i class="fas fa-download" aria-hidden="true"></i></a>
+				                <% } else if(content.fl){ %>
+				                	<a href="<%= content.fl %>" target="_blank" class="btn btn-block green">Download or View <i class="fas fa-download" aria-hidden="true"></i></a>
+				                <% } %>
 					            <a href="/<%= content._id %>/edit" class="btn btn-block yellow">Edit <i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
 					            <a href="/<%= content._id %>/delete" class="btn btn-block red">Delete <i class="fas fa-trash-alt" aria-hidden="true"></i></a>
 				            </div>
@@ -95,7 +101,11 @@
 							</div>
 							<p>Info: <%= content.info %></p>
 			                <p>Upload details: TeamGeekseek | <%= content.created.toDateString() %></p>
-							<a href="https://drive.google.com/file/d/<%= content.fid %>/view" target="_blank" class="btn btn-block green">Download or View <i class="fas fa-download" aria-hidden="true"></i></a>
+							<% if(content.fid){ %>
+			                	<a href="https://drive.google.com/file/d/<%= content.fid %>/view" target="_blank" class="btn btn-block green">Download or View <i class="fas fa-download" aria-hidden="true"></i></a>
+			                <% } else if(content.fl){ %>
+			                	<a href="<%= content.fl %>" target="_blank" class="btn btn-block green">Download or View <i class="fas fa-download" aria-hidden="true"></i></a>
+			                <% } %>
 							<% if((currentUser) && ((currentUser._id.equals(content.owner)) || (currentUser._id.toString()===superAdmin))){ %>
 								<a href="/<%= content._id %>/edit" class="btn btn-block yellow">Edit <i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
 					            <a href="/<%= content._id %>/delete" class="btn btn-block red">Delete <i class="fas fa-trash-alt" aria-hidden="true"></i></a>
