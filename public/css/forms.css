@@ -6,19 +6,11 @@ input{
     outline: none; 
     border: none;
 }
-input[type = text]{
-    display: block;
+input[type = text], input[type = url], input[type = password]{
     width: 100%;
     border: 1px solid #e0e0e0;
     border-radius: 2px;
     padding: 1em; 
-}
-input[type = "password"]{
-    display: block;
-    width: 100%;
-    border: 1px solid #e0e0e0;
-    border-radius: 2px;
-    padding: 1em;
 }
 input[type = "password"]:focus{
     box-shadow: 0 0 2px #0277BD;
