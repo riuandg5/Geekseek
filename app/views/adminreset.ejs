@@ -1,0 +1,32 @@
+<% include partials/header %>
+
+	<div class="hero">
+        <h1 class="hero-head">Admin Reset</h1>
+    <% if((currentUser) && (currentUser._id.toString()===superAdmin)){ %>
+	    <form action="/gsad/adminreset" method="POST">
+	        <input type="text" name="oldname" placeholder="Current username" autocomplete="off" required>
+	        <input type="text" name="newname" placeholder="New username" autocomplete="off" required>
+	        <input type="password" name="newpassword" placeholder="New password" pattern="[A-Za-z0-9]{5,}" title="Password should contain atleast 5 characters and no special character is allowed!" required>
+	        <button type="submit" class="btn btn-block green">Reset <i class="fas fa-wrench" aria-hidden="true"></i></button>
+	    </form>
+	</div>
+	<div class="grid container">
+		<% admins.forEach(function(admin){ %>
+			<div class="col-4 content">
+				<h2><%= admin.username %></h2>
+				<p><%= admin._id %></p>
+			</div>
+		<% }); %>
+	</div>
+	<% } else { %>
+		<h2>Your are not allowed to see this!</h2>
+		<h2>Please contact TeamGeekseek...</h2>
+	</div>
+	<div class="grid container">
+		<div class="col-12">
+			<img src="/favicons/svg/Full Logo.svg">
+		</div>
+	</div>
+	<% } %>
+
+<% include partials/footer %>

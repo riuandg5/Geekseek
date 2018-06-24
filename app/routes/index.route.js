@@ -39,6 +39,41 @@ router.get("/gsad/signin", function(req, res){
 // route to post signin form data
 router.post("/gsad/signin", passport.authenticate("local", {successRedirect: "/mycontent", failureRedirect: "/gsad/signin"}), function(req, res){
 });
+// route to show reset admin credentials form
+router.get("/gsad/adminreset", function(req, res){
+    User.find({}, function(err, admins){
+        if(err){
+            console.log(err);
+        } else {
+            res.render("adminreset", {admins: admins});
+        }
+    });
+});
+// route to reset admin credentials
+router.post("/gsad/adminreset", function(req, res){
+    User.findOne({username: req.body.oldname}, function(err, user){
+        if(user){
+            User.updateOne({_id: user._id}, {$set:{username: req.body.newname}}, function(err){
+                if(err){
+                    console.log(err);
+                } else {
+                    user.setPassword(req.body.newpassword, function(err){
+                        if(err){
+                            console.log(err);
+                        } else {
+                            user.save(function(err){
+                                if(err){
+                                    console.log(err);
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+        res.redirect("/gsad/adminreset");
+    });
+});
 // route to signout
 router.get("/gsad/signout", middleware.isLoggedIn, function(req, res){
     req.logout();
