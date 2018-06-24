@@ -9,6 +9,7 @@ var contentSchema = new mongoose.Schema({
     title: String,
     info: String,
     fid: String,
+    fl: String,
     // get id of user logged in who created the content
     owner: {
         type: mongoose.Schema.Types.ObjectId,
