@@ -30,7 +30,7 @@ if(process.env.NODE_ENV !== 'production'){
         deletedid   = key.deletedid;
 } else {
     var clientemail = process.env.CLIENTEMAIL,
-        privatekey  = process.env.PRIVATEKEY,
+        privatekey  = process.env.PRIVATEKEY.replace(/\\n/g, '\n'),
         folderid    = process.env.FOLDERID,
         deletedid   = process.env.DELETEDID;
 }
