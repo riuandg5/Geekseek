@@ -1,3 +1,8 @@
+if(process.env.NODE_ENV){
+    console.log("production");
+} else {
+    console.log("development");
+}
 // express router configuration
 var express = require("express"),
     router  = express.Router();
