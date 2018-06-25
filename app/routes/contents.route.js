@@ -20,23 +20,23 @@ var fs = require("fs");
 // require googleapis to handle drive api requests
 var {google} = require("googleapis");
 // require google authentication key
-var key = require("../config/config.json");
+var key = require("./config/config.json");
 // tell google to use new version of rest api
 var drive = google.drive({version: 'v3'});
 // Jason Web Token Client method of google authentication
 var jwtClient  = new google.auth.JWT(
-    key.client_email,
+    key.client_email || process.env.CLIENTEMAIL,
     null,
-    key.private_key,
+    key.private_key || process.env.PRIVATEKEY,
     ['https://www.googleapis.com/auth/drive'],
     null
 );
 // authorize client
 jwtClient.authorize();
 // id of folder to which content is uploaded
-var folderId = process.env.FOLDERID || '1-jkAMYjcv3u9ZH-tUif2rvovgLCY7pDS';
+var folderId = key.folderid || process.env.FOLDERID;
 // id of folder to which deleted content is moved
-var deletedId = process.env.DELETEDID || '1ds7OZ7ChpMO5sgyA9AcxiGPu0kaRs6ob';
+var deletedId = key.deletedid || process.env.DELETEDID;
 // require models
 var Content = require("../models/Content.model"),
     Post    = require("../models/Post.model"),
