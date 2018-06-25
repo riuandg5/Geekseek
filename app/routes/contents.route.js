@@ -23,9 +23,9 @@ var {google} = require("googleapis");
 var drive = google.drive({version: 'v3'});
 // Jason Web Token Client method of google authentication
 var jwtClient  = new google.auth.JWT(
-    require("../../config/config.json").client_email || process.env.CLIENTEMAIL,
+    process.env.CLIENTEMAIL,
     null,
-    require("../../config/config.json").private_key || process.env.PRIVATEKEY,
+    process.env.PRIVATEKEY,
     ['https://www.googleapis.com/auth/drive'],
     null
 );
