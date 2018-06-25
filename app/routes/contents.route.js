@@ -1,8 +1,3 @@
-if(process.env.NODE_ENV){
-    console.log("production");
-} else {
-    console.log("development");
-}
 // express router configuration
 var express = require("express"),
     router  = express.Router();
@@ -24,24 +19,35 @@ var upload = multer({storage: storage});
 var fs = require("fs");
 // require googleapis to handle drive api requests
 var {google} = require("googleapis");
-// require google authentication key
-var key = require("../../config/config.json");
 // tell google to use new version of rest api
 var drive = google.drive({version: 'v3'});
+// require google authentication key
+if(process.env.NODE_ENV !== 'production'){
+    var key         = require("../../config/config.json"),
+        clientemail = key.client_email,
+        privatekey  = key.private_key,
+        folderid    = key.folderid,
+        deletedid   = key.deletedid;
+} else {
+    var clientemail = process.env.CLIENTEMAIL,
+        privatekey  = process.env.PRIVATEKEY,
+        folderid    = process.env.FOLDERID,
+        deletedid   = process.env.DELETEDID;
+}
 // Jason Web Token Client method of google authentication
 var jwtClient  = new google.auth.JWT(
-    key.client_email || process.env.CLIENTEMAIL,
+    clientemail,
     null,
-    key.private_key || process.env.PRIVATEKEY,
+    privatekey,
     ['https://www.googleapis.com/auth/drive'],
     null
 );
 // authorize client
 jwtClient.authorize();
 // id of folder to which content is uploaded
-var folderId = key.folderid || process.env.FOLDERID;
+var folderId = folderid;
 // id of folder to which deleted content is moved
-var deletedId = key.deletedid || process.env.DELETEDID;
+var deletedId = deletedid;
 // require models
 var Content = require("../models/Content.model"),
     Post    = require("../models/Post.model"),
