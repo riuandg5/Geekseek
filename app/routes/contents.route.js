@@ -19,15 +19,13 @@ var upload = multer({storage: storage});
 var fs = require("fs");
 // require googleapis to handle drive api requests
 var {google} = require("googleapis");
-// require google authentication key
-var key = require("../../config/config.json");
 // tell google to use new version of rest api
 var drive = google.drive({version: 'v3'});
 // Jason Web Token Client method of google authentication
 var jwtClient  = new google.auth.JWT(
-    key.client_email || process.env.CLIENTEMAIL,
+    require("../../config/config.json").client_email || process.env.CLIENTEMAIL,
     null,
-    key.private_key || process.env.PRIVATEKEY,
+    require("../../config/config.json").private_key || process.env.PRIVATEKEY,
     ['https://www.googleapis.com/auth/drive'],
     null
 );
