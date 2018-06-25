@@ -20,7 +20,7 @@ var fs = require("fs");
 // require googleapis to handle drive api requests
 var {google} = require("googleapis");
 // require google authentication key
-var key = require("./config/config.json");
+var key = require("../../config/config.json");
 // tell google to use new version of rest api
 var drive = google.drive({version: 'v3'});
 // Jason Web Token Client method of google authentication
