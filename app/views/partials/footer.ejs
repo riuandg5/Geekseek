@@ -17,13 +17,25 @@
 	</div>
 	<script src="/js/script.js"></script>
 	<script>
-        if('serviceWorker' in navigator){
-			navigator.serviceWorker.register('/service-worker.js').then(function(reg){
-        		console.log("ServiceWorker registration successful with scope: ", reg.scope);
-        	}).catch(function(reg){
-        		console.error("ServiceWorker registration failed: ", reg);
-        	})
-        }
+        if(window.matchMedia('(display-mode: standalone)').matches){
+		    if("serviceWorker" in navigator){
+			 	navigator.serviceWorker.register('/service-worker.js').then(function(reg){
+			    	console.log("ServiceWorker registration successful with scope: ", reg.scope);
+			    }).catch(function(reg){
+		    		console.error("ServiceWorker registration failed: ", reg);
+		    	})
+			}
+		} else {
+			if("serviceWorker" in navigator){
+			 	navigator.serviceWorker.register('/service-worker.js').then(function(reg){
+			 		reg.unregister().then(function(boolean){
+			 			console.log("Service worker unregistered: ", boolean);
+			 		})
+			    }).catch(function(reg){
+		    		console.error("ServiceWorker registration failed: ", reg);
+		    	})
+		    }
+		}
     </script>
 </body>
 </html>
