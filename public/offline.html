@@ -49,6 +49,15 @@
             padding-left: 20px;
             padding-right: 20px;
         }
+        .error button{
+            outline: none;
+            border: none;
+            background: none;
+            cursor: pointer;
+            padding-top: 20px;
+            color: dodgerblue;
+            font-size: 20px;
+        }
         .error .container-error-404 .clip{
             display: inline-block;
             transform: skew(-45deg);
@@ -120,7 +129,8 @@
         <div class="clip"><div class="shadow"><span class="digit firstDigit"></span></div></div>
     </div>
     <h1>(ಥ﹏ಥ)</h1>
-    <h2>Can't fetch from cache... Turn on your data connection!</h2>
+    <h2>Can't fetch from cache... Turn on your data connection and refresh!</h2>
+    <button onclick="window.history.back()">&larr;GoBack</button>
 </div>
 <script>
     function randomNum(){

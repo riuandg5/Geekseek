@@ -22,7 +22,7 @@ self.addEventListener('install', function onServiceWorkerInstall(event){
 
 // The fetch event happens for the page request with the ServiceWorker's scope, and any request made within that page
 self.addEventListener('fetch', function onServiceWorkerFetch(event){
-    console.log('Fetch event: ', event);
+    console.log('Fetch event: ', event.request.url);
     // Calling event.respondWith means we're in charge of providing the response. We pass in a promise that resolves with a response object
     event.respondWith(
     // First we look if we can get the (maybe updated) resource from the network
@@ -38,10 +38,15 @@ self.addEventListener('fetch', function onServiceWorkerFetch(event){
             // On failure, look up in the Cache for the requested resource
             console.log(`Fetch from network for ${event.request.url} is unsuccessfull: `, reason);
             return caches.match(event.request).then(function returnCachedResponse(cachedResponse){
-                return cachedResponse
-            }).catch(function(err){
-                console.log("Can't get from cache: ", err);
-                return caches.match("offline.html");
+                if(cachedResponse){
+                    return cachedResponse
+                } else {
+                    // On faliure, look for offline page and return
+                    console.log("Can't get from cache also..");
+                    return caches.match("offline.html").then(function returnOfflinePage(offlinePage){
+                        return offlinePage
+                    })
+                }
             })
         })
     );
