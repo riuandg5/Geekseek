@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Geekseek</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+        }
+        .error{
+            text-align: center;
+            position: relative;
+            top: 20vh;
+        }
+        .error .clip .shadow{
+            height: 180px;
+        }
+        .error .clip:nth-of-type(2) .shadow{
+            width: 130px;
+        }
+        .error .clip:nth-of-type(1) .shadow, .error .clip:nth-of-type(3) .shadow{
+            width: 250px;
+        }
+        .error .digit{
+            width: 150px;
+            height: 150px;
+            line-height: 150px;
+            font-size: 120px;
+            font-weight: bold;
+        }
+        .error h1{
+            padding-top: 40px;
+        }
+        .error h2{
+            font-size: 30px;
+            font-weight: bold;
+        }
+        .error h1,h2{
+            color: #A2A2A2;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        .error .container-error-404 .clip{
+            display: inline-block;
+            transform: skew(-45deg);
+        }
+        .error .clip .shadow{
+            overflow: hidden;
+        }
+        .error .clip:nth-of-type(2) .shadow{
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 20px 0px 20px -15px rgba(150, 150, 150,0.8), 20px 0px 20px -15px rgba(150, 150, 150,0.8);
+        }
+        .error .clip:nth-of-type(3) .shadow:after, .error .clip:nth-of-type(1) .shadow:after{
+            content: "";
+            position: absolute;
+            right: -8px;
+            bottom: 0px;
+            z-index: 9999;
+            height: 100%;
+            width: 10px;
+            background: linear-gradient(90deg, transparent, rgba(173,173,173, 0.8), transparent);
+            border-radius: 50%;
+        }
+        .error .clip:nth-of-type(3) .shadow:after{
+            left: -8px;
+        }
+        .error .digit{
+            position: relative;
+            top: 8%;
+            color: white;
+            background: #07B3F9;
+            border-radius: 50%;
+            display: inline-block;
+            transform: skew(45deg);
+        }
+        .error .clip:nth-of-type(2) .digit{
+            left: -10%;
+        }
+        .error .clip:nth-of-type(1) .digit{
+            right: -20%;
+        }
+        .error .clip:nth-of-type(3) .digit{
+            left: -20%;
+        }
+        @media(max-width: 767px){
+            .error .clip .shadow{
+                height: 100px;
+            }
+            .error .clip:nth-of-type(2) .shadow{
+                width: 80px;
+            }
+            .error .clip:nth-of-type(1) .shadow, .error .clip:nth-of-type(3) .shadow{
+                width: 100px;
+            }
+            .error .digit{
+                width: 80px;
+                height: 80px;
+                line-height: 80px;
+                font-size: 52px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="error">
+    <div class="container-error-404">
+        <div class="clip"><div class="shadow"><span class="digit thirdDigit"></span></div></div>
+        <div class="clip"><div class="shadow"><span class="digit secondDigit"></span></div></div>
+        <div class="clip"><div class="shadow"><span class="digit firstDigit"></span></div></div>
+    </div>
+    <h1>(ಥ﹏ಥ)</h1>
+    <h2>Can't fetch from cache... Turn on your data connection!</h2>
+</div>
+<script>
+    function randomNum(){
+            "use strict";
+            return Math.floor(Math.random() * 9)+1;
+    }
+    var loop1, loop2, loop3, time = 30, i = 0, number,
+        selector3 = document.querySelector('.thirdDigit'),
+        selector2 = document.querySelector('.secondDigit'),
+        selector1 = document.querySelector('.firstDigit');
+        loop3 = setInterval(function(){
+            "use strict";
+            if(i > 40){
+                clearInterval(loop3);
+                selector3.textContent = 4;
+            } else {
+                selector3.textContent = randomNum();
+                i++;
+            }
+        }, time);
+        loop2 = setInterval(function(){
+            "use strict";
+            if(i > 80){
+                clearInterval(loop2);
+                selector2.textContent = 0;
+            } else {
+                selector2.textContent = randomNum();
+                i++;
+            }
+        }, time);
+        loop1 = setInterval(function(){
+            "use strict";
+            if(i > 100){
+                clearInterval(loop1);
+                selector1.textContent = 4;
+            } else {
+                selector1.textContent = randomNum();
+                i++;
+            }
+        }, time);
+</script>
+</body>
+</html>

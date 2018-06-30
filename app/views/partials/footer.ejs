@@ -24,17 +24,26 @@
 			    }).catch(function(reg){
 		    		console.error("ServiceWorker registration failed: ", reg);
 		    	})
+			} else {
+				console.log("ServiceWorker is not supported in current browser!");
 			}
 		} else {
 			if("serviceWorker" in navigator){
-			 	navigator.serviceWorker.register('/service-worker.js').then(function(reg){
-			 		reg.unregister().then(function(boolean){
-			 			console.log("Service worker unregistered: ", boolean);
-			 		})
-			    }).catch(function(reg){
-		    		console.error("ServiceWorker registration failed: ", reg);
-		    	})
-		    }
+			 	navigator.serviceWorker.getRegistrations().then(function(registrations){
+ 					for(let registration of registrations){
+						registration.unregister()
+					}
+				})
+				caches.keys().then(function(cacheNames){
+					for(let cacheName of cacheNames){
+						caches.delete(cacheName).then(function(boolean){
+							console.log(`Cache ${cacheName} is deleted : ${boolean}`);
+						})
+					}
+				})
+		    } else {
+				console.log("ServiceWorker is not supported in current browser!");
+			}
 		}
     </script>
 </body>

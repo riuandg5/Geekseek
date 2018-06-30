@@ -11,7 +11,8 @@ self.addEventListener('install', function onServiceWorkerInstall(event){
             return cache.addAll([
                 '/',
                 '/favicons/svg/ss.jpg',
-                '/favicons/svg/ra.jpg'
+                '/favicons/svg/ra.jpg',
+                '/offline.html'
             ])
         }).catch(function(err){
             console.log("Can't add to cache: ", err);
@@ -26,7 +27,7 @@ self.addEventListener('fetch', function onServiceWorkerFetch(event){
     event.respondWith(
     // First we look if we can get the (maybe updated) resource from the network
         fetch(event.request).then(function updateCacheAndReturnNetworkResponse(networkResponse){
-            console.log(`Fetch from network for ${event.request.url} successfull, updating cache..`);
+            console.log(`Fetch from network for ${event.request.url} is successfull, updating cache..`);
             caches.open(currentCache).then(function addToCache(cache){
                 return cache.add(event.request)
             }).catch(function(err){
@@ -35,11 +36,12 @@ self.addEventListener('fetch', function onServiceWorkerFetch(event){
             return networkResponse
         }).catch(function lookupCachedResponse(reason){
             // On failure, look up in the Cache for the requested resource
-            console.log(`Fetch from network for ${event.request.url} failed: `, reason);
+            console.log(`Fetch from network for ${event.request.url} is unsuccessfull: `, reason);
             return caches.match(event.request).then(function returnCachedResponse(cachedResponse){
                 return cachedResponse
             }).catch(function(err){
                 console.log("Can't get from cache: ", err);
+                return caches.match("offline.html");
             })
         })
     );
