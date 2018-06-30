@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Lato');
+@import url('https://fonts.googleapis.com/css?family=Inconsolata|Lato');
 @import url("reset.css");
 @import url("buttons.css");
 @import url("navbar.css");
@@ -11,9 +11,5 @@
 @import url("moveToTop.css");
 @import url("slideshow.css");
 @import url("sidebar.css");
-@import url("gsicon.css");
-@import url("folderExpand.css");
-@import url("icons.css");
-@import url("tab.css");
 @import url("emoji.css");
 @import url("blog.css");

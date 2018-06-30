@@ -4,8 +4,8 @@
 	display: flex;
     background-color: #e0e0e0;
     padding: 1.5em;
-    line-height: 2;
-    color:#333;
+    line-height: 1.5;
+    color: #333;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
@@ -24,15 +24,20 @@
 	color: blue;
 }
 .postbody pre, code{
-	padding: 0 0.4em 0.1em 0.4em;
+	padding: 0.1em 0.4em 0.1em 0.4em;
 	margin-left: 0.1em;
 	margin-right: 0.1em;
 	border-radius: 0.2em;
-	background-color: #888;
-	color: white;
+	background-color: #333;
+	color: #c1c2c3;
+	overflow-x: scroll;
+	font-family: 'Inconsolata', monospace;
+}
+.postbody pre{
+	padding: 0.5em 1em;
 }
 .postbody pre .language-js{
-	color: yellow;
+	color: dodgerblue;
 }
 .postbody li{
 	margin-left: 1.5em;
