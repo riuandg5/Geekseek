@@ -5,8 +5,6 @@ self.addEventListener('fetch', function onServiceWorkerFetch(event){
         fetch(event.request).then(function returnNetworkResponse(networkResponse){
             console.log(`Fetch from network for ${event.request.url} is successfull.`);
             return networkResponse
-        }).catch(function return(err){
-            console.log(`Fetch from network for ${event.request.url} is unsuccessfull: `, err);
         })
     );
 });
