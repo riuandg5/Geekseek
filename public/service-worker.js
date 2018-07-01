@@ -10,9 +10,6 @@ self.addEventListener('install', function onServiceWorkerInstall(event){
         caches.open(currentCache).then(function addResourceToCache(cache){
             return cache.addAll([
                 '/',
-                '/favicons/android-chrome-192x192.png',
-                '/favicons/android-chrome-384x384.png',
-                '/favicons/mstile-150x150.png',
                 '/favicons/svg/ss.jpg',
                 '/favicons/svg/ra.jpg',
                 '/offline.html'

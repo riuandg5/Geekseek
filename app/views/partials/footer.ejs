@@ -29,25 +29,14 @@
 			}
 		} else {
 			if("serviceWorker" in navigator){
-				navigator.serviceWorker.register('/service-worker.js').then(function(reg){
-			    	console.log("Add to homescreen should popup!");
+				navigator.serviceWorker.register('/sw.js').then(function(reg){
+					console.log("Add to homescreen should popup!");
+					reg.unregister().then(function(boolean){
+			 			console.log("Service worker unregistered: ", boolean);
+			 		})
 			    }).catch(function(reg){
 		    		console.error("Add to homescreen popup failed: ", reg);
 		    	})
-			 	navigator.serviceWorker.getRegistrations().then(function(registrations){
-			 		if(registrations[0].active){
-			 			for(let registration of registrations){
-							registration.unregister()
-						}
-			 		}
-				})
-				caches.keys().then(function(cacheNames){
-					for(let cacheName of cacheNames){
-						caches.delete(cacheName).then(function(boolean){
-							console.log(`Cache ${cacheName} is deleted : ${boolean}`);
-						})
-					}
-				})
 		    } else {
 				console.log("ServiceWorker is not supported in current browser!");
 			}
