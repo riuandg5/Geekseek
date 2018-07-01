@@ -31,9 +31,6 @@
 			if("serviceWorker" in navigator){
 				navigator.serviceWorker.register('/sw.js').then(function(reg){
 					console.log("Add to homescreen should popup!");
-					reg.unregister().then(function(boolean){
-			 			console.log("Service worker unregistered: ", boolean);
-			 		})
 			    }).catch(function(reg){
 		    		console.error("Add to homescreen popup failed: ", reg);
 		    	})
