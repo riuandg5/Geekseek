@@ -133,6 +133,15 @@
     <button onclick="window.history.back()">&larr;GoBack</button>
 </div>
 <script>
+    if("serviceWorker" in navigator){
+        navigator.serviceWorker.register('/service-worker.js').then(function(reg){
+            console.log("ServiceWorker registration successful with scope: ", reg.scope);
+        }).catch(function(reg){
+            console.error("ServiceWorker registration failed: ", reg);
+        })
+    } else {
+        console.log("ServiceWorker is not supported in current browser!");
+    }
     function randomNum(){
             "use strict";
             return Math.floor(Math.random() * 9)+1;
