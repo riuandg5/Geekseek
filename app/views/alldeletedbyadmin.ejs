@@ -4,9 +4,11 @@
         <div class="hero">
 			<h1 class="hero-head">All contents deleted by admin</h1>
 			<h2>Only superadmin can delete them permanently..</h2>
-			<% if(currentUser){ %>
-				<a href="/mycontent" class="btn blue big">MyContent <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-			<% } %>
+			<div class="hero-options">
+				<% if(currentUser){ %>
+					<a href="/mycontent" class="btn blue big">MyContent <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+				<% } %>
+			</div>
         </div>
         <div class="grid container">
         	<% if((currentUser) && (currentUser._id.toString()===superAdmin)){ %>

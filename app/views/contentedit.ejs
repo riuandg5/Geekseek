@@ -1,9 +1,11 @@
 <% include partials/header %>
 <div class="hero">
     <h1 class="hero-head">Edit Content</h1>
-    <a href="/mycontent" class="btn big red">Cancel <i class="fas fa-times" aria-hidden="true"></i></a>
+    <div class="hero-options">
+        <a href="/mycontent" class="btn big red">Cancel <i class="fas fa-times" aria-hidden="true"></i></a>
+    </div>
 </div>
-<form action="/<%= content._id %>/update?_method=PUT" method="POST" enctype="multipart/form-data" onsubmit="return requireThis()" style="margin-bottom:50px;">
+<form action="/<%= content._id %>/update?_method=PUT" method="POST" enctype="multipart/form-data" onsubmit="return shouldSubmit()" style="margin-bottom:50px;">
     <div class="form-grid container">
         <div class="col-12">
                 <input type="file" id="upfile" name="fup" onchange="requireThis()" style="width: 49%; height: 30px;">
@@ -63,6 +65,10 @@
         </div>
     </div>
 </form>
+<svg id="loader" viewBox="-2000 -1000 4000 2000" style="display: none;">
+    <path id="inf" d="M354-354A500 500 0 1 1 354 354L-354-354A500 500 0 1 0-354 354z"></path>
+    <use xlink:href="#inf" stroke-dasharray="1570 5143" stroke-dashoffset="6713px"></use>
+</svg>
 <script>
     function requireThis(){
         var file = document.querySelector("#upfile"),
@@ -79,6 +85,15 @@
             file.disabled = false;
             link.disabled = false;
             return true;
+        }
+    }
+    function shouldSubmit(){
+        if(requireThis()){
+            document.getElementById('loader').style.display='';
+            return true
+        } else {
+            alert("Please provide content file or link!");
+            return false
         }
     }
     document.getElementById("<%= content.ctype %>").selected = true;

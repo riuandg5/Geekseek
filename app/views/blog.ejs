@@ -3,9 +3,11 @@
     <div class="animator">
         <div class="hero">
             <h1 class="hero-head">Geekseek Blog</h1>
-            <% if(currentUser){ %>
-                <a href="/blog/posts/new" class="btn green big">NewPost <i class="fas fa-edit" aria-hidden="true"></i></a>
-            <% } %>
+            <div class="hero-options">
+                <% if(currentUser){ %>
+                    <a href="/blog/posts/new" class="btn green big">NewPost <i class="fas fa-edit" aria-hidden="true"></i></a>
+                <% } %>
+            </div>
         </div>
         <div class="grid container">
             <% posts.sort(function(a, b){return b.created - a.created}).forEach(function(post){ %>

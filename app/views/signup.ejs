@@ -2,9 +2,11 @@
 
 	<div class="hero">
         <h1 class="hero-head">New Admin</h1>
-    <% if((currentUser) && (currentUser._id.toString()===superAdmin)){ %>
-    	<a href="/gsad/adminreset" class="btn big yellow">Admin Reset <i class="fas fa-wrench" aria-hidden="true"></i></a>
-    	<a href="/" class="btn big red">Cancel <i class="fas fa-times" aria-hidden="true"></i></a>
+	    <% if((currentUser) && (currentUser._id.toString()===superAdmin)){ %>
+		    <div class="hero-options">
+		    	<a href="/gsad/adminreset" class="btn big yellow">Admin Reset <i class="fas fa-wrench" aria-hidden="true"></i></a>
+		    	<a href="/" class="btn big red">Cancel <i class="fas fa-times" aria-hidden="true"></i></a>
+		    </div>
     </div>
 	    <div class="container">
 		    <form action="/gsad/signup" method="POST">

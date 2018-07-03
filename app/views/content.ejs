@@ -21,25 +21,27 @@
 				<h1 class="hero-head">MyContent</h1>
 				<h2></h2>
 			<% } %>
-			<% if(currentUser){ %>
-				<a href="/gsad/upload" class="btn green big">NewContent <i class="fas fa-plus" aria-hidden="true"></i></a>
-				<% if(ctitle!=="mycontent"){ %>
-					<a href="/mycontent" class="btn blue big">MyContent <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+			<div class="hero-options">
+				<% if(currentUser){ %>
+					<a href="/gsad/upload" class="btn green big">NewContent <i class="fas fa-plus" aria-hidden="true"></i></a>
+					<% if(ctitle!=="mycontent"){ %>
+						<a href="/mycontent" class="btn blue big">MyContent <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+					<% } %>
 				<% } %>
-			<% } %>
-			<% if((currentUser) && (currentUser._id.toString()===superAdmin)){ %>
-				<a href="/alldeletedbyadmin" class="btn red big">DeletedContent <i class="fas fa-trash" aria-hidden="true"></i></a>
-			<% } %>
-			<p>
+				<% if((currentUser) && (currentUser._id.toString()===superAdmin)){ %>
+					<a href="/alldeletedbyadmin" class="btn red big">DeletedContent <i class="fas fa-trash" aria-hidden="true"></i></a>
+				<% } %>
+			</div>
+        </div>
+        <div class="grid container">
+        	<p class="col-12">
 				Instructions for better search results :<br>
 				> Select branch only or Select sem only or Select both or Search directly<br>
 				> If you select branch and sem both then you can filter more by typing subject, title and info of the content<br>
 				> If you don't select branch and sem then you can directly search in "search more..."
 			</p>
-        </div>
-        <div class="grid container">
         	<div class="col-12">
-	        	<select id="branch" onchange="searchFunction()" style="width: 49.5%; height: 30px;">
+	        	<select id="branch" onchange="searchFunction()" style="width: 49.4%; height: 30px;">
 					<option value="" selected>Select branch..</option>
 					<option value="ALL">ALL</option>
 					<option value="COE">COE</option>
@@ -50,7 +52,7 @@
 					<option value="ME">ME</option>
 					<option value="BT">BT</option>
 				</select>
-				<select id="sem" onchange="searchFunction()" style="width: 49.5%; height: 30px;">
+				<select id="sem" onchange="searchFunction()" style="width: 49.4%; height: 30px;">
 					<option value="" selected>Select sem..</option>
 					<option value=" 1">1</option>
 					<option value=" 2">2</option>
