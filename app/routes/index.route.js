@@ -64,6 +64,17 @@ router.post("/gsad/adminreset", function(req, res){
                             user.save(function(err){
                                 if(err){
                                     console.log(err);
+                                } else {
+                                    Content.updateMany({"owner.id": user._id}, {$set:{"owner.name": req.body.newname}}, function(err){
+                                        if(err){
+                                            console.log(err);
+                                        }
+                                    })
+                                    Post.updateMany({"owner.id": user._id}, {$set:{"owner.name": req.body.newname}}, function(err){
+                                        if(err){
+                                            console.log(err);
+                                        }
+                                    })
                                 }
                             });
                         }

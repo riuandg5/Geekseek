@@ -8,8 +8,11 @@ var postSchema = new mongoose.Schema({
     styledbody: String,
     // get id of user logged in who created the post
     owner: {
-    	type: mongoose.Schema.Types.ObjectId,
-    	ref: "User"
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        },
+        name: String
     },
     created: {type: Date, default: Date.now}
 });

@@ -16,7 +16,14 @@
                     Sub: <%= content.subject %>
                 </div>
                 <p>Info: <%= content.info %></p>
-                <p>Upload details: TeamGeekseek | <%= content.ctype %> | <%= content.created.toDateString() %></p>
+                <p>Upload details: 
+                    <% if((currentUser) && (currentUser._id.toString()===superAdmin)){ %>
+                        <%= content.owner.name %> 
+                    <% } else { %>
+                        TeamGeekseek 
+                    <% } %>
+                    | <%= content.created.toDateString() %>
+                </p>
                 <% if(content.fid){ %>
                     <a href="https://drive.google.com/file/d/<%= content.fid %>/view" target="_blank" class="btn btn-block green">Download or View <i class="fas fa-download" aria-hidden="true"></i></a>
                 <% } else if(content.fl){ %>

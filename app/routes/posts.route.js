@@ -35,7 +35,7 @@ router.get("/blog/posts/new", function(req, res){
 // route to create new post
 router.post("/blog/posts/new", function(req, res){
     var result = md.render(req.body.post.postbody);
-    Post.create({branch: req.body.post.forbranch, sem: req.body.post.forsem, rawbody: req.body.post.postbody, styledbody: result, owner: req.user.id}, function(err, newPost){
+    Post.create({branch: req.body.post.forbranch, sem: req.body.post.forsem, rawbody: req.body.post.postbody, styledbody: result, owner: {id: req.user._id, name: req.user.username}}, function(err, newPost){
         if(err){
             console.log(err);
         } else {

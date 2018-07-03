@@ -12,8 +12,11 @@ var contentSchema = new mongoose.Schema({
     fl: String,
     // get id of user logged in who created the content
     owner: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        },
+        name: String
     },
     created: {type: Date, default: Date.now}
 });

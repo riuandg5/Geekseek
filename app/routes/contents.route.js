@@ -114,7 +114,7 @@ router.post('/gsad/upload', upload.single("fup"), function (req, res){
                 console.log(err);
                 return;
             }
-            Content.create({ctype: req.body.content.type, branch: req.body.content.forbranch, sem: req.body.content.forsem, subject: req.body.content.subject, title: req.body.content.title, info: req.body.content.info, fid: file.data.id, owner: req.user.id}, function(err, newContent){
+            Content.create({ctype: req.body.content.type, branch: req.body.content.forbranch, sem: req.body.content.forsem, subject: req.body.content.subject, title: req.body.content.title, info: req.body.content.info, fid: file.data.id, owner: {id: req.user._id, name: req.user.username}}, function(err, newContent){
                 if(err){
                     console.log(err);
                 } else {
@@ -126,7 +126,7 @@ router.post('/gsad/upload', upload.single("fup"), function (req, res){
             });
         });
     } else {
-        Content.create({ctype: req.body.content.type, branch: req.body.content.forbranch, sem: req.body.content.forsem, subject: req.body.content.subject, title: req.body.content.title, info: req.body.content.info, fl: req.body.lup, owner: req.user.id}, function(err, newContent){
+        Content.create({ctype: req.body.content.type, branch: req.body.content.forbranch, sem: req.body.content.forsem, subject: req.body.content.subject, title: req.body.content.title, info: req.body.content.info, fl: req.body.lup, owner: {id: req.user._id, name: req.user.username}}, function(err, newContent){
             if(err){
                 console.log(err);
             } else {

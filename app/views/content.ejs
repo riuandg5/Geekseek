@@ -69,7 +69,7 @@
 			</div>
         	<% if(ctitle==="mycontent"){ %>
         		<% contents.sort(function(a, b){return b.created - a.created}).forEach(function(content){ %>
-        			<% if((currentUser) && ((currentUser._id.equals(content.owner)) || (currentUser._id.toString()===superAdmin))){ %>
+        			<% if((currentUser) && ((currentUser._id.equals(content.owner.id)) || (currentUser._id.toString()===superAdmin))){ %>
         				<div class="col-4 content">
         					<p class="searchstring" style="display: none;"><%= content.branch %> <%= content.sem %> <%= content.subject %> <%= content.title %> <%= content.info %></p>
 				            <div class="desc">
@@ -79,7 +79,14 @@
 									Sub: <%= content.subject %>
 								</div>
 								<p>Info: <%= content.info %></p>
-				                <p>Upload details: TeamGeekseek | <%= content.ctype %> | <%= content.created.toDateString() %></p>
+								<p>Upload details: 
+				                	<% if((currentUser) && (currentUser._id.toString()===superAdmin)){ %>
+				                		<%= content.owner.name %> 
+				                	<% } else { %>
+				                		TeamGeekseek 
+				                	<% } %>
+				                	| <%= content.ctype %> | <%= content.created.toDateString() %>
+				                </p>
 				                <% if(content.fid){ %>
 				                	<a href="https://drive.google.com/file/d/<%= content.fid %>/view" target="_blank" class="btn btn-block green">Download or View <i class="fas fa-download" aria-hidden="true"></i></a>
 				                <% } else if(content.fl){ %>
@@ -102,13 +109,20 @@
 								Sub: <%= content.subject %>
 							</div>
 							<p>Info: <%= content.info %></p>
-			                <p>Upload details: TeamGeekseek | <%= content.created.toDateString() %></p>
+			                <p>Upload details: 
+			                	<% if((currentUser) && (currentUser._id.toString()===superAdmin)){ %>
+			                		<%= content.owner.name %> 
+			                	<% } else { %>
+			                		TeamGeekseek 
+			                	<% } %>
+			                	| <%= content.created.toDateString() %>
+			                </p>
 							<% if(content.fid){ %>
 			                	<a href="https://drive.google.com/file/d/<%= content.fid %>/view" target="_blank" class="btn btn-block green">Download or View <i class="fas fa-download" aria-hidden="true"></i></a>
 			                <% } else if(content.fl){ %>
 			                	<a href="<%= content.fl %>" target="_blank" class="btn btn-block green">Download or View <i class="fas fa-download" aria-hidden="true"></i></a>
 			                <% } %>
-							<% if((currentUser) && ((currentUser._id.equals(content.owner)) || (currentUser._id.toString()===superAdmin))){ %>
+							<% if((currentUser) && ((currentUser._id.equals(content.owner.id)) || (currentUser._id.toString()===superAdmin))){ %>
 								<a href="/<%= content._id %>/edit" class="btn btn-block yellow">Edit <i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
 					            <a href="/<%= content._id %>/delete" class="btn btn-block red">Delete <i class="fas fa-trash-alt" aria-hidden="true"></i></a>
 					        <% } %>

@@ -19,7 +19,7 @@
                         </div>
                         <div class="for-r">
                             <%= post.created.toDateString() %>
-                            <% if((currentUser) && ((currentUser._id.equals(post.owner)) || (currentUser._id.toString()===superAdmin))){ %>
+                            <% if((currentUser) && ((currentUser._id.equals(post.owner.id)) || (currentUser._id.toString()===superAdmin))){ %>
                                 <a href="/blog/posts/<%= post._id %>/edit"><i class="fas fa-pencil-alt" aria-hidden="true" style="color: #555"></i></a>
                             <% } %>
                         </div>
@@ -29,6 +29,10 @@
                         <%- post.styledbody %>
                     </div>
                     <% if((currentUser) && (currentUser._id.toString()===superAdmin)){ %>
+                        <div><hr></div>
+                        <div class="for-l">
+                            Posted by : <%= post.owner.name %>
+                        </div>
                         <form action="/blog/posts/<%= post._id %>?_method=DELETE" method="POST">
                             <button class="btn red btn-block">Delete <i class="fas fa-trash-alt" aria-hidden="true"></i></button>
                         </form>
