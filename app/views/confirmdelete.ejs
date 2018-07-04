@@ -25,7 +25,7 @@
                     | <%= content.created.toDateString() %>
                 </p>
                 <% if(content.fid){ %>
-                    <a href="https://drive.google.com/file/d/<%= content.fid %>/view" target="_blank" class="btn btn-block green">Download or View <i class="fas fa-download" aria-hidden="true"></i></a>
+                    <a href="https://drive.google.com/file/d/<%= content.fid %>/view" target="_blank" rel="noopener" class="btn btn-block green">Download or View <i class="fas fa-download" aria-hidden="true"></i></a>
                 <% } else if(content.fl){ %>
                     <a href="<%= content.fl %>" target="_blank" class="btn btn-block green">Download or View <i class="fas fa-download" aria-hidden="true"></i></a>
                 <% } %>

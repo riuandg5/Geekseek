@@ -15,7 +15,7 @@
         		<% files.forEach(function(file){ %>
         			<div class="col-4 content">
 			            <div class="desc">
-			            	<h2><a href="https://drive.google.com/file/d/<%= file.id %>/view" target="_blank"><%= file.name %></a></h2>
+			            	<h2><a href="https://drive.google.com/file/d/<%= file.id %>/view" target="_blank" rel="noopener"><%= file.name %></a></h2>
 			            	<form action="/deletepermanently/<%= file.id %>" method="POST">
 			            		<button type="submit" class="btn btn-block red">Delete Permanently <i class="fas fa-trash-alt" aria-hidden="true"></i></button>
 						    </form>
