@@ -6,6 +6,7 @@ var bodyParser       = require("body-parser"),
     expressSanitizer = require("express-sanitizer"),
     mongoose         = require("mongoose"),
     express          = require("express"),
+    flash            = require("connect-flash"),
     passport		 = require("passport"),
     LocalStrategy	 = require("passport-local"),
     app              = express();
@@ -35,15 +36,20 @@ app.use(require("express-session")({
 	resave: false,
 	saveUninitialized: false
 }));
+app.use(flash()); // use flash for flash messages
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-// middleware to tell that currentUser is req.user and get superadmin id
+// middleware to send variables to every template page
 app.use(function(req, res, next){
+    // set currentUser to req.user and get superadmin id
 	res.locals.currentUser = req.user;
-    res.locals.superAdmin = process.env.SUPERADMIN || '5b1d6a77e267e411d4cce1a6';
+    res.locals.superAdmin  = process.env.SUPERADMIN || '5b1d6a77e267e411d4cce1a6';
+    // success and error message variables for flash
+    res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
 	next();
 });
 // use body-parser

@@ -81,6 +81,7 @@ router.post("/deletepermanently/:fid", middleware.isLoggedIn, function(req, res)
             console.log(err);
             return;
         }
+        req.flash("success", "Successfully deleted content from drive!");
         res.redirect("/alldeletedbyadmin");
     });
 });
@@ -121,6 +122,7 @@ router.post('/gsad/upload', upload.single("fup"), function (req, res){
                     fs.unlink('./tempUploads/' + req.file.originalname, (err) => {
                         if (err) throw err;
                     });
+                    req.flash("success", "Content file uploaded successfully!");
                     res.redirect("/mycontent");
                 }
             });
@@ -130,6 +132,7 @@ router.post('/gsad/upload', upload.single("fup"), function (req, res){
             if(err){
                 console.log(err);
             } else {
+                req.flash("success", "Content link uploaded successfully!");
                 res.redirect("/mycontent");
             }
         });
@@ -150,7 +153,7 @@ router.put("/:contentid/update", upload.single("fup"), function(req, res){
     Content.findById(req.params.contentid, function(err, foundContent){
         if(err){
             console.log(err);
-        } else {
+        } else if(foundContent){
             if(req.file){
                 if(foundContent.fid){
                 	// upload new file and move old file to delete
@@ -184,6 +187,7 @@ router.put("/:contentid/update", upload.single("fup"), function(req, res){
 		                                fs.unlink('./tempUploads/' + req.file.originalname, (err) => {
 		                                    if (err) throw err;
 		                                });
+                                        req.flash("success", "New content file updated successfully!");
 		                                res.redirect("/mycontent");
 		                            }
 		                        });
@@ -237,6 +241,7 @@ router.put("/:contentid/update", upload.single("fup"), function(req, res){
                                 fs.unlink('./tempUploads/' + req.file.originalname, (err) => {
                                     if (err) throw err;
                                 });
+                                req.flash("success", "Successfully replaced content link with file!");
                                 res.redirect("/mycontent");
                             }
                         });
@@ -259,6 +264,7 @@ router.put("/:contentid/update", upload.single("fup"), function(req, res){
                                 if(err){
                                     console.log(err);
                                 } else {
+                                    req.flash("success", "Successfully replaced content file with link!");
                                     res.redirect("/mycontent");
                                 }
                             });
@@ -270,6 +276,7 @@ router.put("/:contentid/update", upload.single("fup"), function(req, res){
                         if(err){
                             console.log(err);
                         } else {
+                            req.flash("success", "New content link updated successfully!");
                             res.redirect("/mycontent");
                         }
                     });
@@ -280,10 +287,14 @@ router.put("/:contentid/update", upload.single("fup"), function(req, res){
                     if(err){
                         console.log(err);
                     } else {
+                        req.flash("success", "Content data updated successfully!");
                         res.redirect("/mycontent");
                     }
                 });
             }
+        } else {
+            req.flash("error", "No content found! Check content id.");
+            res.redirect("/mycontent");
         }
     });
 });
@@ -314,6 +325,7 @@ router.delete("/:contentid/delete/confirmed", middleware.isLoggedIn, function(re
                     if(err){
                         console.log(err);
                     }
+                    req.flash("success", "Content deleted successfully!");
                     res.redirect("/mycontent");
                 });
             });
@@ -323,6 +335,7 @@ router.delete("/:contentid/delete/confirmed", middleware.isLoggedIn, function(re
             if(err){
                 console.log(err);
             }
+            req.flash("success", "Content deleted successfully!");
             res.redirect("/mycontent");
         });
     }

@@ -108,3 +108,9 @@
             </ul>
         </div>
     </div>
+    <% if(error.length > 0){ %>
+        <div class="flash error"><div><%= error %></div></div>
+    <% } %>
+    <% if(success.length > 0){ %>
+        <div class="flash success"><div><%= success %></div></div>
+    <% } %>

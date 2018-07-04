@@ -39,6 +39,7 @@ router.post("/blog/posts/new", function(req, res){
         if(err){
             console.log(err);
         } else {
+            req.flash("success", "Successfully created new post!");
             res.redirect("/blog/posts");
         }
     });
@@ -66,6 +67,7 @@ router.put("/blog/posts/:id", function(req, res){
                     console.log(err);
                 }
             });
+            req.flash("success", "Successfully updated post!");
             res.redirect("/blog/posts");
         }
     });
@@ -76,6 +78,7 @@ router.delete("/blog/posts/:id", middleware.isLoggedIn, function(req, res){
         if(err){
             console.log(err);
         }
+        req.flash("success", "Successfully deleted post!");
         res.redirect("/blog/posts");
     });
 });

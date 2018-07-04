@@ -5,6 +5,7 @@ middlewareObj.isLoggedIn = function(req, res, next){
 	if(req.isAuthenticated()){
 		return next(); // if logged in then proceed
 	} else {
+		req.flash("error", "Please signin first!");
 		res.redirect("/gsad/signin"); // if not logged in then redirect to login first
 	}
 }
